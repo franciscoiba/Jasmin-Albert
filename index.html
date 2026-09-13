@@ -37,12 +37,9 @@ body {
 
 .invitation {
   position: relative;
-
   width: 100%;
   min-height: 100vh;
-
   padding: 65px 22px 60px;
-
   text-align: center;
   overflow: hidden;
 }
@@ -104,10 +101,8 @@ body {
 .content {
   position: relative;
   z-index: 2;
-
   width: 100%;
   max-width: 500px;
-
   margin: 0 auto;
 }
 
@@ -286,8 +281,13 @@ body {
 
   opacity: 1;
 
+  /*
+    COMPLETE REVEAL SPEED
+    1.5 seconds
+  */
+
   transition:
-    opacity 0.9s ease;
+    opacity 1.5s ease;
 }
 
 
@@ -611,15 +611,6 @@ let hasStarted = false;
 
 let completelyRevealed = false;
 
-
-/*
-  We don't calculate the percentage
-  every single movement.
-
-  This keeps the animation smoother
-  on iPhone and Android.
-*/
-
 let movementCounter = 0;
 
 
@@ -648,11 +639,6 @@ function createScratchSurface() {
       rect.height * ratio
     );
 
-
-  /*
-    Reset transformation first.
-    Important if canvas gets recreated.
-  */
 
   ctx.setTransform(
     1,
@@ -846,8 +832,7 @@ function scratch(event) {
 
 
   /*
-    Hide "Scratch to reveal"
-    as soon as scratching begins.
+    Hide text when scratching starts
   */
 
   if (!hasStarted) {
@@ -876,11 +861,9 @@ function scratch(event) {
   ctx.beginPath();
 
 
-  /*
-    Scratch brush size.
 
-    Increase 34 if you want
-    a larger scratch area.
+  /*
+    SCRATCH SIZE
   */
 
   ctx.arc(
@@ -933,17 +916,6 @@ function scratch(event) {
 function getScratchedPercentage() {
 
 
-  /*
-    Canvas has high-resolution pixels
-    on Retina displays.
-
-    We sample pixels instead of checking
-    absolutely every pixel.
-
-    This is considerably faster on iPhone.
-  */
-
-
   const imageData =
     ctx.getImageData(
       0,
@@ -963,13 +935,9 @@ function getScratchedPercentage() {
 
 
   /*
-    Every pixel = 4 values:
-    R G B A
-
-    Instead of checking every pixel,
-    sample approximately every 16 pixels.
+    Sample pixels for better
+    performance on iPhone
   */
-
 
   const sampleStep =
     4 * 16;
@@ -988,11 +956,6 @@ function getScratchedPercentage() {
 
     sampledPixels++;
 
-
-    /*
-      Alpha under 100 means
-      the area has been scratched away.
-    */
 
     if (
       pixels[i] < 100
@@ -1039,8 +1002,8 @@ function checkRevealProgress() {
 
 
   /*
-    At 20% scratched,
-    reveal the entire photo.
+    Once 20% has been scratched,
+    reveal the entire photograph.
   */
 
   if (
@@ -1076,28 +1039,22 @@ function revealEntirePhoto() {
   scratching = false;
 
 
-
-  /*
-    Make sure text disappears.
-  */
-
   scratchText.style.opacity =
     "0";
 
 
-
   /*
-    Fade remaining pearl layer away.
+    Remaining scratch layer
+    fades away over 1.5 seconds.
   */
 
   canvas.style.opacity =
     "0";
 
 
-
   /*
-    After fade animation,
-    remove canvas completely.
+    Remove canvas AFTER
+    transition finishes.
   */
 
   setTimeout(
@@ -1111,7 +1068,7 @@ function revealEntirePhoto() {
 
     },
 
-    900
+    1500
 
   );
 
@@ -1169,10 +1126,6 @@ canvas.addEventListener(
 
     scratching = false;
 
-
-    /*
-      Also check when finger is lifted.
-    */
 
     checkRevealProgress();
 

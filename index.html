@@ -1,1135 +1,687 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
-
-<title>Jazmin & Albert | Save the Date</title>
-
-<style>
-
-/* =========================
-   GENERAL
-========================= */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: #ffffff;
-  color: #171717;
-  font-family: Georgia, "Times New Roman", serif;
-  overflow-x: hidden;
-}
-
-.invitation {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  padding: 65px 22px 60px;
-  text-align: center;
-  overflow: hidden;
-}
-
-
-/* =========================
-   BACKGROUND WATERMARK
-========================= */
-
-.watermark {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: 100%;
-  max-width: 650px;
-  height: 900px;
-
-  background-image:
-    url("SAVE THE DATE JAZ-ALB-079.jpeg");
-
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-
-  filter:
-    grayscale(100%)
-    brightness(1.12);
-
-  opacity: 0.075;
-
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      black 0%,
-      black 55%,
-      transparent 100%
-    );
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black 0%,
-      black 55%,
-      transparent 100%
-    );
-
-  pointer-events: none;
-}
-
-
-/* =========================
-   CONTENT
-========================= */
-
-.content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-
-/* =========================
-   TOP TEXT
-========================= */
-
-.top-details {
-  display: flex;
-  justify-content: space-between;
-
-  margin-bottom: 105px;
-
-  font-size: 9px;
-  letter-spacing: 4px;
-  line-height: 2;
-}
-
-.top-left {
-  text-align: left;
-}
-
-.top-right {
-  text-align: right;
-}
-
-.small-line {
-  display: block;
-
-  width: 42px;
-  height: 1px;
-
-  margin-top: 14px;
-
-  background: #777;
-}
-
-.top-right .small-line {
-  margin-left: auto;
-}
-
-
-/* =========================
-   SAVE THE DATE
-========================= */
-
-.save {
-  margin-bottom: 35px;
-
-  font-size: 13px;
-  font-weight: normal;
-
-  letter-spacing: 7px;
-}
-
-
-/* =========================
-   NAMES
-========================= */
-
-.name {
-  font-size: clamp(47px, 14vw, 72px);
-
-  font-weight: 400;
-
-  line-height: 1.08;
-
-  letter-spacing: 9px;
-}
-
-.ampersand {
-  margin: 3px 0 5px;
-
-  color: #c7b7a4;
-
-  font-family:
-    "Times New Roman",
-    Georgia,
-    serif;
-
-  font-size: 57px;
-
-  font-style: italic;
-  font-weight: 300;
-
-  line-height: 1;
-}
-
-
-/* =========================
-   DATE
-========================= */
-
-.date {
-  margin-top: 24px;
-
-  font-size: 18px;
-
-  letter-spacing: 8px;
-}
-
-
-/* =========================
-   SUBTITLE
-========================= */
-
-.subtitle {
-  margin: 45px auto 28px;
-
-  font-size: 10px;
-
-  letter-spacing: 4.5px;
-
-  line-height: 2;
-}
-
-
-/* =========================
-   SCRATCH CARD
-========================= */
-
-.scratch-wrapper {
-  position: relative;
-
-  width: 100%;
-  max-width: 390px;
-
-  aspect-ratio: 4 / 5;
-
-  margin: 20px auto 0;
-
-  overflow: hidden;
-
-  background: #f8f8f6;
-
-  border-radius: 4px;
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.035);
-}
-
-
-/* PHOTO UNDER SCRATCH */
-
-.reveal-photo {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  user-select: none;
-
-  -webkit-user-drag: none;
-}
-
-
-/* SCRATCH LAYER */
-
-#scratchCanvas {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 5;
-
-  touch-action: none;
-
-  opacity: 1;
-
-  transition:
-    opacity 0.45s ease;
-}
-
-
-/* SCRATCH TEXT */
-
-.scratch-instruction {
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  transform:
-    translate(-50%, -50%)
-    rotate(-5deg);
-
-  z-index: 6;
-
-  pointer-events: none;
-
-  color: #9a8874;
-
-  font-family:
-    "Brush Script MT",
-    "Snell Roundhand",
-    cursive;
-
-  font-size: 34px;
-
-  line-height: 1.05;
-
-  transition:
-    opacity 0.25s ease;
-}
-
-.heart {
-  display: block;
-
-  margin-top: 13px;
-
-  font-family: Georgia, serif;
-
-  font-size: 28px;
-}
-
-
-/* =========================
-   BOTTOM
-========================= */
-
-.bottom {
-  margin-top: 38px;
-}
-
-.vertical-line {
-  width: 1px;
-  height: 35px;
-
-  margin: 0 auto;
-
-  background: #777;
-}
-
-.forever {
-  margin-top: 22px;
-
-  font-size: 10px;
-
-  letter-spacing: 5px;
-}
-
-.arrow {
-  width: 18px;
-  height: 18px;
-
-  margin: 26px auto 0;
-
-  border-right: 1px solid #111;
-  border-bottom: 1px solid #111;
-
-  transform: rotate(45deg);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 390px) {
-
-  .invitation {
-    padding:
-      55px
-      18px
-      55px;
-  }
-
-  .top-details {
-    margin-bottom: 90px;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-  }
-
-  .save {
-    font-size: 11px;
-
-    letter-spacing: 6px;
-  }
-
-  .name {
-    letter-spacing: 7px;
-  }
-
-  .date {
-    font-size: 16px;
-
-    letter-spacing: 6px;
-  }
-
-  .subtitle {
-    letter-spacing: 3.5px;
-  }
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>Jazmin & Albert | Save the Date</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #ffffff;
+      color: #171717;
+      font-family: Georgia, "Times New Roman", serif;
+      overflow-x: hidden;
+    }
+
+    .invitation {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      padding: 65px 22px 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .watermark {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 100%;
+      max-width: 650px;
+      height: 900px;
+
+      background-image: url("SAVE THE DATE JAZ-ALB-079.jpeg");
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+
+      filter: grayscale(100%) brightness(1.12);
+      opacity: 0.075;
+
+      -webkit-mask-image:
+        linear-gradient(
+          to bottom,
+          black 0%,
+          black 55%,
+          transparent 100%
+        );
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black 0%,
+          black 55%,
+          transparent 100%
+        );
+
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .top-details {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 105px;
+      font-size: 9px;
+      letter-spacing: 4px;
+      line-height: 2;
+    }
+
+    .top-left {
+      text-align: left;
+    }
+
+    .top-right {
+      text-align: right;
+    }
+
+    .small-line {
+      display: block;
+      width: 42px;
+      height: 1px;
+      margin-top: 14px;
+      background: #777;
+    }
+
+    .top-right .small-line {
+      margin-left: auto;
+    }
+
+    .save {
+      margin-bottom: 35px;
+      font-size: 13px;
+      font-weight: normal;
+      letter-spacing: 7px;
+    }
+
+    .name {
+      font-size: clamp(47px, 14vw, 72px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: 9px;
+    }
+
+    .ampersand {
+      margin: 3px 0 5px;
+      color: #c7b7a4;
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 57px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .date {
+      margin-top: 24px;
+      font-size: 18px;
+      letter-spacing: 8px;
+    }
+
+    .subtitle {
+      margin: 45px auto 28px;
+      font-size: 10px;
+      letter-spacing: 4.5px;
+      line-height: 2;
+    }
+
+    .scratch-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 390px;
+      aspect-ratio: 4 / 5;
+      margin: 20px auto 0;
+      overflow: hidden;
+      background: #f8f8f6;
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.035);
+    }
+
+    .reveal-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #scratchCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      touch-action: none;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    .scratch-instruction {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-5deg);
+      z-index: 6;
+      pointer-events: none;
+      color: #9a8874;
+      font-family: "Brush Script MT", "Snell Roundhand", cursive;
+      font-size: 34px;
+      line-height: 1.05;
+      transition: opacity 0.25s ease;
+    }
+
+    .heart {
+      display: block;
+      margin-top: 13px;
+      font-family: Georgia, serif;
+      font-size: 28px;
+    }
+
+    .bottom {
+      margin-top: 38px;
+    }
+
+    .vertical-line {
+      width: 1px;
+      height: 35px;
+      margin: 0 auto;
+      background: #777;
+    }
+
+    .forever {
+      margin-top: 22px;
+      font-size: 10px;
+      letter-spacing: 5px;
+    }
+
+    .arrow {
+      width: 18px;
+      height: 18px;
+      margin: 26px auto 0;
+      border-right: 1px solid #111;
+      border-bottom: 1px solid #111;
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 390px) {
+      .invitation {
+        padding: 55px 18px 55px;
+      }
+
+      .top-details {
+        margin-bottom: 90px;
+        font-size: 8px;
+        letter-spacing: 3px;
+      }
+
+      .save {
+        font-size: 11px;
+        letter-spacing: 6px;
+      }
+
+      .name {
+        letter-spacing: 7px;
+      }
+
+      .date {
+        font-size: 16px;
+        letter-spacing: 6px;
+      }
+
+      .subtitle {
+        letter-spacing: 3.5px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <section class="invitation">
 
-<section class="invitation">
+    <div class="watermark"></div>
 
+    <div class="content">
 
-  <div class="watermark"></div>
+      <div class="top-details">
+        <div class="top-left">
+          LOVE<br>
+          ALWAYS
+          <span class="small-line"></span>
+        </div>
 
-
-  <div class="content">
-
-
-    <div class="top-details">
-
-
-      <div class="top-left">
-
-        LOVE<br>
-        ALWAYS
-
-        <span class="small-line"></span>
-
+        <div class="top-right">
+          A BEAUTIFUL<br>
+          TOMORROW
+          <span class="small-line"></span>
+        </div>
       </div>
 
-
-      <div class="top-right">
-
-        A BEAUTIFUL<br>
-        TOMORROW
-
-        <span class="small-line"></span>
-
+      <div class="save">
+        SAVE THE DATE
       </div>
 
+      <h1 class="name">
+        JAZMIN
+      </h1>
 
-    </div>
+      <div class="ampersand">
+        &amp;
+      </div>
 
+      <h1 class="name">
+        ALBERT
+      </h1>
 
-    <div class="save">
+      <div class="date">
+        02 · 19 · 2027
+      </div>
 
-      SAVE THE DATE
-
-    </div>
-
-
-    <h1 class="name">
-
-      JAZMIN
-
-    </h1>
-
-
-    <div class="ampersand">
-
-      &amp;
-
-    </div>
-
-
-    <h1 class="name">
-
-      ALBERT
-
-    </h1>
-
-
-    <div class="date">
-
-      02 · 19 · 2027
-
-    </div>
-
-
-    <div class="subtitle">
-
-      A BEAUTIFUL TOMORROW
-
-      <br>
-
-      TOGETHER
-
-    </div>
-
-
-
-    <div class="scratch-wrapper">
-
-
-      <img
-        class="reveal-photo"
-        src="SAVE THE DATE JAZ-ALB-079.jpeg"
-        alt="Jazmin and Albert"
-      >
-
-
-      <canvas
-        id="scratchCanvas">
-      </canvas>
-
-
-      <div
-        class="scratch-instruction"
-        id="scratchText"
-      >
-
-        Scratch
-
+      <div class="subtitle">
+        A BEAUTIFUL TOMORROW
         <br>
+        TOGETHER
+      </div>
 
-        to reveal
+      <div class="scratch-wrapper">
 
+        <img
+          class="reveal-photo"
+          src="SAVE THE DATE JAZ-ALB-079.jpeg"
+          alt="Jazmin and Albert"
+        >
 
-        <span class="heart">
+        <canvas id="scratchCanvas"></canvas>
 
-          ♡
+        <div
+          class="scratch-instruction"
+          id="scratchText"
+        >
+          Scratch
+          <br>
+          to reveal
 
-        </span>
-
+          <span class="heart">
+            ♡
+          </span>
+        </div>
 
       </div>
 
+      <div class="bottom">
 
-    </div>
+        <div class="vertical-line"></div>
 
+        <div class="forever">
+          OUR FOREVER BEGINS
+        </div>
 
-
-    <div class="bottom">
-
-
-      <div class="vertical-line"></div>
-
-
-      <div class="forever">
-
-        OUR FOREVER BEGINS
+        <div class="arrow"></div>
 
       </div>
 
-
-      <div class="arrow"></div>
-
-
     </div>
 
-
-  </div>
-
-
-</section>
-
-
-
-<script>
-
-/* =========================================
-   SCRATCH TO REVEAL
-========================================= */
-
-const canvas =
-  document.getElementById("scratchCanvas");
-
-const ctx =
-  canvas.getContext(
-    "2d",
-    {
-      willReadFrequently: true
-    }
-  );
-
-const scratchText =
-  document.getElementById("scratchText");
-
-
-let scratching = false;
-let hasStarted = false;
-let completelyRevealed = false;
-let movementCounter = 0;
-
-
-/* =========================================
-   CREATE SCRATCH SURFACE
-========================================= */
-
-function createScratchSurface() {
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-
-  const ratio =
-    window.devicePixelRatio || 1;
-
-
-  canvas.width =
-    Math.round(
-      rect.width * ratio
-    );
-
-
-  canvas.height =
-    Math.round(
-      rect.height * ratio
-    );
-
-
-  ctx.setTransform(
-    1,
-    0,
-    0,
-    1,
-    0,
-    0
-  );
-
-
-  ctx.scale(
-    ratio,
-    ratio
-  );
-
-
-  /* WHITE PEARL GRADIENT */
-
-  const gradient =
-    ctx.createLinearGradient(
-      0,
-      0,
-      rect.width,
-      rect.height
-    );
-
-
-  gradient.addColorStop(
-    0,
-    "#f3f1ed"
-  );
-
-
-  gradient.addColorStop(
-    0.40,
-    "#ffffff"
-  );
-
-
-  gradient.addColorStop(
-    0.70,
-    "#f8f7f4"
-  );
-
-
-  gradient.addColorStop(
-    1,
-    "#ebe8e2"
-  );
-
-
-  ctx.globalCompositeOperation =
-    "source-over";
-
-
-  ctx.fillStyle =
-    gradient;
-
-
-  ctx.fillRect(
-    0,
-    0,
-    rect.width,
-    rect.height
-  );
-
-
-  /* SUBTLE TEXTURE */
-
-  for (
-    let i = 0;
-    i < 1200;
-    i++
-  ) {
-
-    const opacity =
-      Math.random() * 0.025;
-
-
-    ctx.fillStyle =
-      "rgba(145,135,120," +
-      opacity +
-      ")";
-
-
-    ctx.fillRect(
-
-      Math.random() *
-      rect.width,
-
-      Math.random() *
-      rect.height,
-
-      1,
-
-      1
-
-    );
-
-  }
-
-}
-
-
-
-/* =========================================
-   GET FINGER POSITION
-========================================= */
-
-function getPosition(event) {
-
-  const rect =
-    canvas.getBoundingClientRect();
-
-
-  let clientX;
-  let clientY;
-
-
-  if (
-    event.touches &&
-    event.touches.length
-  ) {
-
-    clientX =
-      event.touches[0].clientX;
-
-    clientY =
-      event.touches[0].clientY;
-
-  }
-
-  else {
-
-    clientX =
-      event.clientX;
-
-    clientY =
-      event.clientY;
-
-  }
-
-
-  return {
-
-    x:
-      clientX -
-      rect.left,
-
-    y:
-      clientY -
-      rect.top
-
-  };
-
-}
-
-
-
-/* =========================================
-   ERASE WITH FINGER
-========================================= */
-
-function eraseWithFinger(event) {
-
-  if (
-    !scratching ||
-    completelyRevealed
-  ) {
-
-    return;
-
-  }
-
-
-  event.preventDefault();
-
-
-  if (!hasStarted) {
-
-    hasStarted = true;
-
-    scratchText.style.opacity =
-      "0";
-
-  }
-
-
-  const position =
-    getPosition(event);
-
-
-  /*
-    DESTINATION-OUT =
-    completely erase the scratch layer.
-  */
-
-  ctx.globalCompositeOperation =
-    "destination-out";
-
-
-  /*
-    FULL SOLID FINGER CIRCLE
-  */
-
-  ctx.beginPath();
-
-
-  ctx.arc(
-    position.x,
-    position.y,
-
-    /* FINGER SIZE */
-    55,
-
-    0,
-    Math.PI * 2
-  );
-
-
-  /*
-    Full opacity guarantees
-    complete erasing.
-  */
-
-  ctx.fillStyle =
-    "rgba(0,0,0,1)";
-
-
-  ctx.fill();
-
-
-  movementCounter++;
-
-
-  /*
-    Check often so the 5%
-    reveal feels responsive.
-  */
-
-  if (
-    movementCounter >= 2
-  ) {
-
-    movementCounter = 0;
-
-    checkRevealProgress();
-
-  }
-
-}
-
-
-
-/* =========================================
-   SCRATCHED PERCENTAGE
-========================================= */
-
-function getScratchedPercentage() {
-
-  const imageData =
-    ctx.getImageData(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-
-  const pixels =
-    imageData.data;
-
-
-  let transparentPixels = 0;
-  let sampledPixels = 0;
-
-
-  const sampleStep =
-    4 * 16;
-
-
-  for (
-    let i = 3;
-    i < pixels.length;
-    i += sampleStep
-  ) {
-
-    sampledPixels++;
-
-
-    if (
-      pixels[i] < 20
-    ) {
-
-      transparentPixels++;
-
+  </section>
+
+  <script>
+    const canvas =
+      document.getElementById("scratchCanvas");
+
+    const ctx =
+      canvas.getContext("2d", {
+        willReadFrequently: true
+      });
+
+    const scratchText =
+      document.getElementById("scratchText");
+
+    let scratching = false;
+    let hasStarted = false;
+    let completelyRevealed = false;
+    let movementCounter = 0;
+
+    function createScratchSurface() {
+      const rect =
+        canvas.getBoundingClientRect();
+
+      const ratio =
+        window.devicePixelRatio || 1;
+
+      canvas.width =
+        Math.round(rect.width * ratio);
+
+      canvas.height =
+        Math.round(rect.height * ratio);
+
+      ctx.setTransform(
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      );
+
+      ctx.scale(
+        ratio,
+        ratio
+      );
+
+      const gradient =
+        ctx.createLinearGradient(
+          0,
+          0,
+          rect.width,
+          rect.height
+        );
+
+      gradient.addColorStop(
+        0,
+        "#f3f1ed"
+      );
+
+      gradient.addColorStop(
+        0.40,
+        "#ffffff"
+      );
+
+      gradient.addColorStop(
+        0.70,
+        "#f8f7f4"
+      );
+
+      gradient.addColorStop(
+        1,
+        "#ebe8e2"
+      );
+
+      ctx.globalCompositeOperation =
+        "source-over";
+
+      ctx.fillStyle =
+        gradient;
+
+      ctx.fillRect(
+        0,
+        0,
+        rect.width,
+        rect.height
+      );
+
+      for (
+        let i = 0;
+        i < 1200;
+        i++
+      ) {
+        const opacity =
+          Math.random() * 0.025;
+
+        ctx.fillStyle =
+          "rgba(145,135,120," +
+          opacity +
+          ")";
+
+        ctx.fillRect(
+          Math.random() *
+            rect.width,
+          Math.random() *
+            rect.height,
+          1,
+          1
+        );
+      }
     }
 
-  }
-
-
-  return (
-
-    transparentPixels /
-    sampledPixels
-
-  ) * 100;
-
-}
-
-
-
-/* =========================================
-   REVEAL AT 5%
-========================================= */
-
-function checkRevealProgress() {
-
-  if (completelyRevealed) {
-    return;
-  }
-
-
-  const percentage =
-    getScratchedPercentage();
-
-
-  if (
-    percentage >= 20
-  ) {
-
-    revealEntirePhoto();
-
-  }
-
-}
-
-
-
-/* =========================================
-   FINAL REVEAL
-========================================= */
-
-function revealEntirePhoto() {
-
-  if (completelyRevealed) {
-    return;
-  }
-
-
-  completelyRevealed = true;
-
-  scratching = false;
-
-
-  scratchText.style.opacity =
-    "0";
-
-
-  /*
-    Quick fade of remaining
-    scratch layer.
-  */
-
-  canvas.style.opacity =
-    "0";
-
-
-  setTimeout(
-
-    function() {
-
-      canvas.style.display =
-        "none";
-
-    },
-
-    450
-
-  );
-
-}
-
-
-
-/* =========================================
-   TOUCH EVENTS
-========================================= */
-
-canvas.addEventListener(
-
-  "touchstart",
-
-  function(event) {
-
-    scratching = true;
-
-    eraseWithFinger(event);
-
-  },
-
-  {
-    passive: false
-  }
-
-);
-
-
-canvas.addEventListener(
-
-  "touchmove",
-
-  eraseWithFinger,
-
-  {
-    passive: false
-  }
-
-);
-
-
-canvas.addEventListener(
-
-  "touchend",
-
-  function() {
-
-    scratching = false;
-
-    checkRevealProgress();
-
-  }
-
-);
-
-
-canvas.addEventListener(
-
-  "touchcancel",
-
-  function() {
-
-    scratching = false;
-
-  }
-
-);
-
-
-
-/* =========================================
-   MOUSE EVENTS
-========================================= */
-
-canvas.addEventListener(
-
-  "mousedown",
-
-  function(event) {
-
-    scratching = true;
-
-    eraseWithFinger(event);
-
-  }
-
-);
-
-
-canvas.addEventListener(
-
-  "mousemove",
-
-  eraseWithFinger
-
-);
-
-
-window.addEventListener(
-
-  "mouseup",
-
-  function() {
-
-    if (scratching) {
-
+    function getPosition(event) {
+      const rect =
+        canvas.getBoundingClientRect();
+
+      let clientX;
+      let clientY;
+
+      if (
+        event.touches &&
+        event.touches.length
+      ) {
+        clientX =
+          event.touches[0].clientX;
+
+        clientY =
+          event.touches[0].clientY;
+      } else {
+        clientX =
+          event.clientX;
+
+        clientY =
+          event.clientY;
+      }
+
+      return {
+        x:
+          clientX -
+          rect.left,
+
+        y:
+          clientY -
+          rect.top
+      };
+    }
+
+    function eraseWithFinger(event) {
+      if (
+        !scratching ||
+        completelyRevealed
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (!hasStarted) {
+        hasStarted = true;
+
+        scratchText.style.opacity =
+          "0";
+      }
+
+      const position =
+        getPosition(event);
+
+      ctx.globalCompositeOperation =
+        "destination-out";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        position.x,
+        position.y,
+        55,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+
+      movementCounter++;
+
+      if (
+        movementCounter >= 2
+      ) {
+        movementCounter = 0;
+
+        checkRevealProgress();
+      }
+    }
+
+    function getScratchedPercentage() {
+      const imageData =
+        ctx.getImageData(
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+      const pixels =
+        imageData.data;
+
+      let transparentPixels = 0;
+      let sampledPixels = 0;
+
+      const sampleStep =
+        4 * 16;
+
+      for (
+        let i = 3;
+        i < pixels.length;
+        i += sampleStep
+      ) {
+        sampledPixels++;
+
+        if (
+          pixels[i] < 20
+        ) {
+          transparentPixels++;
+        }
+      }
+
+      return (
+        transparentPixels /
+        sampledPixels
+      ) * 100;
+    }
+
+    function checkRevealProgress() {
+      if (
+        completelyRevealed
+      ) {
+        return;
+      }
+
+      const percentage =
+        getScratchedPercentage();
+
+      if (
+        percentage >= 20
+      ) {
+        revealEntirePhoto();
+      }
+    }
+
+    function revealEntirePhoto() {
+      if (
+        completelyRevealed
+      ) {
+        return;
+      }
+
+      completelyRevealed = true;
       scratching = false;
 
-      checkRevealProgress();
+      scratchText.style.opacity =
+        "0";
 
+      canvas.style.opacity =
+        "0";
+
+      setTimeout(
+        function() {
+          canvas.style.display =
+            "none";
+        },
+        800
+      );
     }
 
-  }
+    canvas.addEventListener(
+      "touchstart",
+      function(event) {
+        scratching = true;
+        eraseWithFinger(event);
+      },
+      {
+        passive: false
+      }
+    );
 
-);
+    canvas.addEventListener(
+      "touchmove",
+      eraseWithFinger,
+      {
+        passive: false
+      }
+    );
 
+    canvas.addEventListener(
+      "touchend",
+      function() {
+        scratching = false;
+        checkRevealProgress();
+      }
+    );
 
+    canvas.addEventListener(
+      "touchcancel",
+      function() {
+        scratching = false;
+      }
+    );
 
-/* =========================================
-   INITIALIZE
-========================================= */
+    canvas.addEventListener(
+      "mousedown",
+      function(event) {
+        scratching = true;
+        eraseWithFinger(event);
+      }
+    );
 
-window.addEventListener(
+    canvas.addEventListener(
+      "mousemove",
+      eraseWithFinger
+    );
 
-  "load",
+    window.addEventListener(
+      "mouseup",
+      function() {
+        if (scratching) {
+          scratching = false;
+          checkRevealProgress();
+        }
+      }
+    );
 
-  createScratchSurface
-
-);
-
-</script>
-
+    window.addEventListener(
+      "load",
+      createScratchSurface
+    );
+  </script>
 
 </body>
-
 </html>

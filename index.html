@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -262,7 +264,7 @@ body {
   opacity: 1;
 
   transition:
-    opacity 0.75s ease;
+    opacity 1.1s ease;
 }
 
 
@@ -382,6 +384,7 @@ body {
 }
 
 </style>
+
 </head>
 
 <body>
@@ -392,8 +395,6 @@ body {
 
   <div class="content">
 
-
-    <!-- TOP -->
 
     <div class="top-details">
 
@@ -419,14 +420,10 @@ body {
     </div>
 
 
-    <!-- SAVE THE DATE -->
-
     <div class="save">
       SAVE THE DATE
     </div>
 
-
-    <!-- NAMES -->
 
     <h1 class="name">
       JAZMIN
@@ -441,14 +438,10 @@ body {
     </h1>
 
 
-    <!-- DATE -->
-
     <div class="date">
       02 · 19 · 2027
     </div>
 
-
-    <!-- SUBTITLE -->
 
     <div class="subtitle">
 
@@ -460,7 +453,7 @@ body {
 
 
     <!-- =========================
-         SWIPE TO REVEAL
+         SCRATCH TO REVEAL
     ========================== -->
 
     <div class="scratch-wrapper">
@@ -480,7 +473,7 @@ body {
         id="scratchText"
       >
 
-        Swipe
+        Scratch
         <br>
         to reveal
 
@@ -492,8 +485,6 @@ body {
 
     </div>
 
-
-    <!-- BOTTOM -->
 
     <div class="bottom">
 
@@ -515,30 +506,37 @@ body {
 
 <script>
 
-/* =====================================
-   SWIPE TO REVEAL
-===================================== */
+/* =========================================
+   SCRATCH TO REVEAL
+========================================= */
 
 const canvas =
   document.getElementById("scratchCanvas");
 
 const ctx =
-  canvas.getContext("2d");
+  canvas.getContext("2d", {
+    willReadFrequently: true
+  });
 
 const scratchText =
   document.getElementById("scratchText");
 
-let isDragging = false;
+
+let scratching = false;
 let revealed = false;
+let hasStarted = false;
 
-let maxRevealX = 0;
+let lastX = null;
+let lastY = null;
+
+let moveCounter = 0;
 
 
-/* =====================================
-   CREATE WHITE COVER
-===================================== */
+/* =========================================
+   CREATE COVER
+========================================= */
 
-function createCover() {
+function createScratchSurface() {
 
   const rect =
     canvas.getBoundingClientRect();
@@ -571,7 +569,7 @@ function createCover() {
 
 
   /*
-    CLEAN WHITE COVER
+    Pearl white scratch layer
   */
 
   const gradient =
@@ -585,17 +583,17 @@ function createCover() {
 
   gradient.addColorStop(
     0,
-    "#ffffff"
+    "#f4f2ee"
   );
 
   gradient.addColorStop(
-    0.5,
-    "#f8f8f6"
+    0.45,
+    "#ffffff"
   );
 
   gradient.addColorStop(
     1,
-    "#ffffff"
+    "#eeeae4"
   );
 
 
@@ -614,18 +612,41 @@ function createCover() {
     rect.height
   );
 
+
+  /*
+    Very subtle paper texture
+  */
+
+  for (
+    let i = 0;
+    i < 700;
+    i++
+  ) {
+
+    ctx.fillStyle =
+      "rgba(120,110,100,0.018)";
+
+
+    ctx.fillRect(
+      Math.random() * rect.width,
+      Math.random() * rect.height,
+      1,
+      1
+    );
+
+  }
+
 }
 
 
-/* =====================================
-   GET POSITION
-===================================== */
+/* =========================================
+   GET TOUCH / MOUSE POSITION
+========================================= */
 
 function getPosition(event) {
 
   const rect =
     canvas.getBoundingClientRect();
-
 
   let clientX;
   let clientY;
@@ -666,35 +687,54 @@ function getPosition(event) {
 }
 
 
-/* =====================================
-   START SWIPE
-===================================== */
+/* =========================================
+   START SCRATCH
+========================================= */
 
-function startSwipe(event) {
+function startScratch(event) {
 
-  if (revealed) return;
-
-
-  isDragging = true;
-
-
-  scratchText.style.opacity =
-    "0";
+  if (revealed) {
+    return;
+  }
 
 
-  revealSwipe(event);
+  scratching = true;
+
+
+  if (!hasStarted) {
+
+    hasStarted = true;
+
+    scratchText.style.opacity =
+      "0";
+
+  }
+
+
+  const pos =
+    getPosition(event);
+
+
+  lastX =
+    pos.x;
+
+  lastY =
+    pos.y;
+
+
+  scratch(event);
 
 }
 
 
-/* =====================================
-   REVEAL DURING SWIPE
-===================================== */
+/* =========================================
+   SCRATCH
+========================================= */
 
-function revealSwipe(event) {
+function scratch(event) {
 
   if (
-    !isDragging ||
+    !scratching ||
     revealed
   ) {
     return;
@@ -704,79 +744,204 @@ function revealSwipe(event) {
   event.preventDefault();
 
 
-  const rect =
-    canvas.getBoundingClientRect();
-
-
-  const position =
+  const pos =
     getPosition(event);
 
-
-  /*
-    Only increase the reveal area.
-    Moving the finger backwards
-    will not cover the photo again.
-  */
-
-  if (
-    position.x > maxRevealX
-  ) {
-
-    maxRevealX =
-      position.x;
-
-  }
-
-
-  /*
-    Clean reveal:
-    everything from the left edge
-    up to the finger becomes visible.
-  */
 
   ctx.globalCompositeOperation =
     "destination-out";
 
 
-  ctx.fillRect(
-    0,
-    0,
-    maxRevealX,
-    rect.height
+  /*
+    Rounded scratch stroke.
+    Wider than before so it feels
+    more natural on a phone.
+  */
+
+  ctx.lineWidth =
+    56;
+
+  ctx.lineCap =
+    "round";
+
+  ctx.lineJoin =
+    "round";
+
+
+  ctx.beginPath();
+
+
+  if (
+    lastX === null ||
+    lastY === null
+  ) {
+
+    ctx.moveTo(
+      pos.x,
+      pos.y
+    );
+
+  } else {
+
+    ctx.moveTo(
+      lastX,
+      lastY
+    );
+
+  }
+
+
+  ctx.lineTo(
+    pos.x,
+    pos.y
   );
 
 
-  /*
-    Calculate horizontal progress.
-  */
-
-  const percent =
-    (
-      maxRevealX /
-      rect.width
-    ) * 100;
+  ctx.stroke();
 
 
   /*
-    Reveal whole photo at 60%.
+    Small circle ensures
+    first touch is visible.
   */
+
+  ctx.beginPath();
+
+  ctx.arc(
+    pos.x,
+    pos.y,
+    28,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+
+  lastX =
+    pos.x;
+
+  lastY =
+    pos.y;
+
+
+  /*
+    Check progress only every few moves
+    to keep iPhone smooth.
+  */
+
+  moveCounter++;
+
 
   if (
-    percent >= 30
+    moveCounter >= 8
   ) {
 
-    revealEverything();
+    moveCounter = 0;
+
+    checkRevealProgress();
 
   }
 
 }
 
 
-/* =====================================
-   FULL REVEAL
-===================================== */
+/* =========================================
+   CALCULATE SCRATCHED AREA
+========================================= */
 
-function revealEverything() {
+function getScratchedPercentage() {
+
+  const imageData =
+    ctx.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+
+  const pixels =
+    imageData.data;
+
+
+  let transparent = 0;
+  let total = 0;
+
+
+  /*
+    Sample pixels instead of checking all.
+    Faster on Retina displays.
+  */
+
+  const sampleStep =
+    4 * 20;
+
+
+  for (
+    let i = 3;
+    i < pixels.length;
+    i += sampleStep
+  ) {
+
+    total++;
+
+
+    if (
+      pixels[i] < 90
+    ) {
+
+      transparent++;
+
+    }
+
+  }
+
+
+  return (
+    transparent /
+    total
+  ) * 100;
+
+}
+
+
+/* =========================================
+   CHECK 30%
+========================================= */
+
+function checkRevealProgress() {
+
+  if (revealed) {
+    return;
+  }
+
+
+  const percentage =
+    getScratchedPercentage();
+
+
+  /*
+    At 30% scratched,
+    reveal everything.
+  */
+
+  if (
+    percentage >= 30
+  ) {
+
+    revealEntirePhoto();
+
+  }
+
+}
+
+
+/* =========================================
+   COMPLETE REVEAL
+========================================= */
+
+function revealEntirePhoto() {
 
   if (revealed) {
     return;
@@ -785,7 +950,7 @@ function revealEverything() {
 
   revealed = true;
 
-  isDragging = false;
+  scratching = false;
 
 
   scratchText.style.opacity =
@@ -793,7 +958,7 @@ function revealEverything() {
 
 
   /*
-    Fade remaining cover away.
+    Slowly fade remaining scratch layer.
   */
 
   canvas.style.opacity =
@@ -809,22 +974,22 @@ function revealEverything() {
 
     },
 
-    750
+    1100
 
   );
 
 }
 
 
-/* =====================================
+/* =========================================
    TOUCH EVENTS
-===================================== */
+========================================= */
 
 canvas.addEventListener(
 
   "touchstart",
 
-  startSwipe,
+  startScratch,
 
   {
     passive: false
@@ -837,7 +1002,7 @@ canvas.addEventListener(
 
   "touchmove",
 
-  revealSwipe,
+  scratch,
 
   {
     passive: false
@@ -852,7 +1017,12 @@ canvas.addEventListener(
 
   function() {
 
-    isDragging = false;
+    scratching = false;
+
+    lastX = null;
+    lastY = null;
+
+    checkRevealProgress();
 
   }
 
@@ -865,22 +1035,25 @@ canvas.addEventListener(
 
   function() {
 
-    isDragging = false;
+    scratching = false;
+
+    lastX = null;
+    lastY = null;
 
   }
 
 );
 
 
-/* =====================================
+/* =========================================
    MOUSE EVENTS
-===================================== */
+========================================= */
 
 canvas.addEventListener(
 
   "mousedown",
 
-  startSwipe
+  startScratch
 
 );
 
@@ -889,7 +1062,7 @@ canvas.addEventListener(
 
   "mousemove",
 
-  revealSwipe
+  scratch
 
 );
 
@@ -900,26 +1073,36 @@ window.addEventListener(
 
   function() {
 
-    isDragging = false;
+    if (scratching) {
+
+      scratching = false;
+
+      lastX = null;
+      lastY = null;
+
+      checkRevealProgress();
+
+    }
 
   }
 
 );
 
 
-/* =====================================
+/* =========================================
    INITIALIZE
-===================================== */
+========================================= */
 
 window.addEventListener(
 
   "load",
 
-  createCover
+  createScratchSurface
 
 );
 
 </script>
 
 </body>
+
 </html>

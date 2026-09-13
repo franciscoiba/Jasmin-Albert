@@ -44,7 +44,6 @@ body {
   overflow: hidden;
 }
 
-
 /* =========================
    BACKGROUND WATERMARK
 ========================= */
@@ -91,7 +90,6 @@ body {
   pointer-events: none;
 }
 
-
 /* =========================
    CONTENT
 ========================= */
@@ -103,7 +101,6 @@ body {
   max-width: 500px;
   margin: 0 auto;
 }
-
 
 /* =========================
    TOP TEXT
@@ -143,7 +140,6 @@ body {
   margin-left: auto;
 }
 
-
 /* =========================
    SAVE THE DATE
 ========================= */
@@ -156,7 +152,6 @@ body {
 
   letter-spacing: 7px;
 }
-
 
 /* =========================
    NAMES
@@ -190,7 +185,6 @@ body {
   line-height: 1;
 }
 
-
 /* =========================
    DATE
 ========================= */
@@ -202,7 +196,6 @@ body {
 
   letter-spacing: 8px;
 }
-
 
 /* =========================
    SUBTITLE
@@ -217,7 +210,6 @@ body {
 
   line-height: 2;
 }
-
 
 /* =========================
    SCRATCH CARD
@@ -243,7 +235,6 @@ body {
     0 10px 40px rgba(0,0,0,0.035);
 }
 
-
 /* PHOTO UNDER SCRATCH */
 
 .reveal-photo {
@@ -262,7 +253,6 @@ body {
   -webkit-user-drag: none;
 }
 
-
 /* SCRATCH LAYER */
 
 #scratchCanvas {
@@ -280,9 +270,8 @@ body {
   opacity: 1;
 
   transition:
-    opacity 0.8s ease;
+    opacity 0.45s ease;
 }
-
 
 /* SCRATCH TEXT */
 
@@ -325,7 +314,6 @@ body {
   font-size: 28px;
 }
 
-
 /* =========================
    BOTTOM
 ========================= */
@@ -362,7 +350,6 @@ body {
 
   transform: rotate(45deg);
 }
-
 
 /* =========================
    MOBILE
@@ -411,21 +398,15 @@ body {
 
 </head>
 
-
 <body>
-
 
 <section class="invitation">
 
-
   <div class="watermark"></div>
-
 
   <div class="content">
 
-
     <div class="top-details">
-
 
       <div class="top-left">
 
@@ -436,7 +417,6 @@ body {
 
       </div>
 
-
       <div class="top-right">
 
         A BEAUTIFUL<br>
@@ -446,9 +426,7 @@ body {
 
       </div>
 
-
     </div>
-
 
     <div class="save">
 
@@ -456,13 +434,11 @@ body {
 
     </div>
 
-
     <h1 class="name">
 
       JAZMIN
 
     </h1>
-
 
     <div class="ampersand">
 
@@ -470,20 +446,17 @@ body {
 
     </div>
 
-
     <h1 class="name">
 
       ALBERT
 
     </h1>
 
-
     <div class="date">
 
       02 · 19 · 2027
 
     </div>
-
 
     <div class="subtitle">
 
@@ -495,10 +468,7 @@ body {
 
     </div>
 
-
-
     <div class="scratch-wrapper">
-
 
       <img
         class="reveal-photo"
@@ -506,11 +476,9 @@ body {
         alt="Jazmin and Albert"
       >
 
-
       <canvas
         id="scratchCanvas">
       </canvas>
-
 
       <div
         class="scratch-instruction"
@@ -523,26 +491,19 @@ body {
 
         to reveal
 
-
         <span class="heart">
 
           ♡
 
         </span>
 
-
       </div>
-
 
     </div>
 
-
-
     <div class="bottom">
 
-
       <div class="vertical-line"></div>
-
 
       <div class="forever">
 
@@ -550,19 +511,13 @@ body {
 
       </div>
 
-
       <div class="arrow"></div>
-
 
     </div>
 
-
   </div>
 
-
 </section>
-
-
 
 <script>
 
@@ -584,12 +539,10 @@ const ctx =
 const scratchText =
   document.getElementById("scratchText");
 
-
 let scratching = false;
 let hasStarted = false;
 let completelyRevealed = false;
 let movementCounter = 0;
-
 
 /* =========================================
    CREATE SCRATCH SURFACE
@@ -600,22 +553,18 @@ function createScratchSurface() {
   const rect =
     canvas.getBoundingClientRect();
 
-
   const ratio =
     window.devicePixelRatio || 1;
-
 
   canvas.width =
     Math.round(
       rect.width * ratio
     );
 
-
   canvas.height =
     Math.round(
       rect.height * ratio
     );
-
 
   ctx.setTransform(
     1,
@@ -626,12 +575,10 @@ function createScratchSurface() {
     0
   );
 
-
   ctx.scale(
     ratio,
     ratio
   );
-
 
   /* WHITE PEARL GRADIENT */
 
@@ -643,38 +590,31 @@ function createScratchSurface() {
       rect.height
     );
 
-
   gradient.addColorStop(
     0,
     "#f3f1ed"
   );
-
 
   gradient.addColorStop(
     0.40,
     "#ffffff"
   );
 
-
   gradient.addColorStop(
     0.70,
     "#f8f7f4"
   );
-
 
   gradient.addColorStop(
     1,
     "#ebe8e2"
   );
 
-
   ctx.globalCompositeOperation =
     "source-over";
 
-
   ctx.fillStyle =
     gradient;
-
 
   ctx.fillRect(
     0,
@@ -682,7 +622,6 @@ function createScratchSurface() {
     rect.width,
     rect.height
   );
-
 
   /* SUBTLE TEXTURE */
 
@@ -695,12 +634,10 @@ function createScratchSurface() {
     const opacity =
       Math.random() * 0.025;
 
-
     ctx.fillStyle =
       "rgba(145,135,120," +
       opacity +
       ")";
-
 
     ctx.fillRect(
 
@@ -720,8 +657,6 @@ function createScratchSurface() {
 
 }
 
-
-
 /* =========================================
    GET FINGER POSITION
 ========================================= */
@@ -731,10 +666,8 @@ function getPosition(event) {
   const rect =
     canvas.getBoundingClientRect();
 
-
   let clientX;
   let clientY;
-
 
   if (
     event.touches &&
@@ -759,7 +692,6 @@ function getPosition(event) {
 
   }
 
-
   return {
 
     x:
@@ -773,8 +705,6 @@ function getPosition(event) {
   };
 
 }
-
-
 
 /* =========================================
    ERASE WITH FINGER
@@ -791,9 +721,7 @@ function eraseWithFinger(event) {
 
   }
 
-
   event.preventDefault();
-
 
   if (!hasStarted) {
 
@@ -804,10 +732,8 @@ function eraseWithFinger(event) {
 
   }
 
-
   const position =
     getPosition(event);
-
 
   /*
     DESTINATION-OUT =
@@ -817,13 +743,11 @@ function eraseWithFinger(event) {
   ctx.globalCompositeOperation =
     "destination-out";
 
-
   /*
     FULL SOLID FINGER CIRCLE
   */
 
   ctx.beginPath();
-
 
   ctx.arc(
     position.x,
@@ -836,7 +760,6 @@ function eraseWithFinger(event) {
     Math.PI * 2
   );
 
-
   /*
     Full opacity guarantees
     complete erasing.
@@ -845,12 +768,9 @@ function eraseWithFinger(event) {
   ctx.fillStyle =
     "rgba(0,0,0,1)";
 
-
   ctx.fill();
 
-
   movementCounter++;
-
 
   /*
     Check often so the 5%
@@ -869,8 +789,6 @@ function eraseWithFinger(event) {
 
 }
 
-
-
 /* =========================================
    SCRATCHED PERCENTAGE
 ========================================= */
@@ -885,18 +803,14 @@ function getScratchedPercentage() {
       canvas.height
     );
 
-
   const pixels =
     imageData.data;
-
 
   let transparentPixels = 0;
   let sampledPixels = 0;
 
-
   const sampleStep =
     4 * 16;
-
 
   for (
     let i = 3;
@@ -905,7 +819,6 @@ function getScratchedPercentage() {
   ) {
 
     sampledPixels++;
-
 
     if (
       pixels[i] < 20
@@ -917,7 +830,6 @@ function getScratchedPercentage() {
 
   }
 
-
   return (
 
     transparentPixels /
@@ -926,8 +838,6 @@ function getScratchedPercentage() {
   ) * 100;
 
 }
-
-
 
 /* =========================================
    REVEAL AT 5%
@@ -939,13 +849,11 @@ function checkRevealProgress() {
     return;
   }
 
-
   const percentage =
     getScratchedPercentage();
 
-
   if (
-    percentage >= 70
+    percentage >= 5
   ) {
 
     revealEntirePhoto();
@@ -953,8 +861,6 @@ function checkRevealProgress() {
   }
 
 }
-
-
 
 /* =========================================
    FINAL REVEAL
@@ -966,15 +872,12 @@ function revealEntirePhoto() {
     return;
   }
 
-
   completelyRevealed = true;
 
   scratching = false;
 
-
   scratchText.style.opacity =
     "0";
-
 
   /*
     Quick fade of remaining
@@ -983,7 +886,6 @@ function revealEntirePhoto() {
 
   canvas.style.opacity =
     "0";
-
 
   setTimeout(
 
@@ -994,13 +896,11 @@ function revealEntirePhoto() {
 
     },
 
-    800
+    450
 
   );
 
 }
-
-
 
 /* =========================================
    TOUCH EVENTS
@@ -1024,7 +924,6 @@ canvas.addEventListener(
 
 );
 
-
 canvas.addEventListener(
 
   "touchmove",
@@ -1036,7 +935,6 @@ canvas.addEventListener(
   }
 
 );
-
 
 canvas.addEventListener(
 
@@ -1052,7 +950,6 @@ canvas.addEventListener(
 
 );
 
-
 canvas.addEventListener(
 
   "touchcancel",
@@ -1064,8 +961,6 @@ canvas.addEventListener(
   }
 
 );
-
-
 
 /* =========================================
    MOUSE EVENTS
@@ -1085,7 +980,6 @@ canvas.addEventListener(
 
 );
 
-
 canvas.addEventListener(
 
   "mousemove",
@@ -1093,7 +987,6 @@ canvas.addEventListener(
   eraseWithFinger
 
 );
-
 
 window.addEventListener(
 
@@ -1113,8 +1006,6 @@ window.addEventListener(
 
 );
 
-
-
 /* =========================================
    INITIALIZE
 ========================================= */
@@ -1128,7 +1019,6 @@ window.addEventListener(
 );
 
 </script>
-
 
 </body>
 

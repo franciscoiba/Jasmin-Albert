@@ -53,7 +53,6 @@ body {
   position: absolute;
   top: 0;
   left: 50%;
-
   transform: translateX(-50%);
 
   width: 100%;
@@ -100,10 +99,8 @@ body {
 .content {
   position: relative;
   z-index: 2;
-
   width: 100%;
   max-width: 500px;
-
   margin: 0 auto;
 }
 
@@ -282,13 +279,8 @@ body {
 
   opacity: 1;
 
-  /*
-    FINAL REVEAL SPEED
-    0.8 seconds
-  */
-
   transition:
-    opacity 0.8s ease;
+    opacity 0.45s ease;
 }
 
 
@@ -426,15 +418,11 @@ body {
 <section class="invitation">
 
 
-  <!-- BACKGROUND WATERMARK -->
-
   <div class="watermark"></div>
 
 
   <div class="content">
 
-
-    <!-- TOP -->
 
     <div class="top-details">
 
@@ -462,16 +450,12 @@ body {
     </div>
 
 
-    <!-- SAVE THE DATE -->
-
     <div class="save">
 
       SAVE THE DATE
 
     </div>
 
-
-    <!-- NAMES -->
 
     <h1 class="name">
 
@@ -494,16 +478,12 @@ body {
     </h1>
 
 
-    <!-- DATE -->
-
     <div class="date">
 
       02 · 19 · 2027
 
     </div>
 
-
-    <!-- SUBTITLE -->
 
     <div class="subtitle">
 
@@ -516,10 +496,6 @@ body {
     </div>
 
 
-
-    <!-- =====================
-         SCRATCH TO REVEAL
-    ====================== -->
 
     <div class="scratch-wrapper">
 
@@ -561,8 +537,6 @@ body {
     </div>
 
 
-
-    <!-- BOTTOM -->
 
     <div class="bottom">
 
@@ -710,7 +684,7 @@ function createScratchSurface() {
   );
 
 
-  /* SUBTLE PEARL TEXTURE */
+  /* SUBTLE TEXTURE */
 
   for (
     let i = 0;
@@ -821,11 +795,6 @@ function eraseWithFinger(event) {
   event.preventDefault();
 
 
-  /*
-    Hide text as soon as
-    scratching begins.
-  */
-
   if (!hasStarted) {
 
     hasStarted = true;
@@ -841,40 +810,36 @@ function eraseWithFinger(event) {
 
 
   /*
-    Completely remove the
-    scratch layer under finger.
+    DESTINATION-OUT =
+    completely erase the scratch layer.
   */
 
   ctx.globalCompositeOperation =
     "destination-out";
 
 
+  /*
+    FULL SOLID FINGER CIRCLE
+  */
+
   ctx.beginPath();
 
 
-  /*
-    FINGER SIZE
-
-    55 = radius
-  */
-
   ctx.arc(
-
     position.x,
-
     position.y,
 
+    /* FINGER SIZE */
     55,
 
     0,
-
     Math.PI * 2
-
   );
 
 
   /*
-    Solid erase.
+    Full opacity guarantees
+    complete erasing.
   */
 
   ctx.fillStyle =
@@ -888,7 +853,8 @@ function eraseWithFinger(event) {
 
 
   /*
-    Check progress frequently.
+    Check often so the 5%
+    reveal feels responsive.
   */
 
   if (
@@ -906,11 +872,10 @@ function eraseWithFinger(event) {
 
 
 /* =========================================
-   CALCULATE SCRATCHED PERCENTAGE
+   SCRATCHED PERCENTAGE
 ========================================= */
 
 function getScratchedPercentage() {
-
 
   const imageData =
     ctx.getImageData(
@@ -929,11 +894,6 @@ function getScratchedPercentage() {
   let sampledPixels = 0;
 
 
-  /*
-    Sample pixels for good
-    iPhone performance.
-  */
-
   const sampleStep =
     4 * 16;
 
@@ -943,7 +903,6 @@ function getScratchedPercentage() {
     i < pixels.length;
     i += sampleStep
   ) {
-
 
     sampledPixels++;
 
@@ -971,16 +930,13 @@ function getScratchedPercentage() {
 
 
 /* =========================================
-   REVEAL AT 20%
+   REVEAL AT 5%
 ========================================= */
 
 function checkRevealProgress() {
 
-
   if (completelyRevealed) {
-
     return;
-
   }
 
 
@@ -988,12 +944,8 @@ function checkRevealProgress() {
     getScratchedPercentage();
 
 
-  /*
-    AUTOMATIC REVEAL AT 20%
-  */
-
   if (
-    percentage >= 20
+    percentage >= 5
   ) {
 
     revealEntirePhoto();
@@ -1010,11 +962,8 @@ function checkRevealProgress() {
 
 function revealEntirePhoto() {
 
-
   if (completelyRevealed) {
-
     return;
-
   }
 
 
@@ -1028,21 +977,13 @@ function revealEntirePhoto() {
 
 
   /*
-    Start fading the remaining
+    Quick fade of remaining
     scratch layer.
   */
 
   canvas.style.opacity =
     "0";
 
-
-  /*
-    800 milliseconds =
-    0.8 seconds.
-
-    This matches the CSS
-    transition above.
-  */
 
   setTimeout(
 
@@ -1053,7 +994,7 @@ function revealEntirePhoto() {
 
     },
 
-    800
+    450
 
   );
 
@@ -1063,7 +1004,6 @@ function revealEntirePhoto() {
 
 /* =========================================
    TOUCH EVENTS
-   IPHONE / ANDROID
 ========================================= */
 
 canvas.addEventListener(

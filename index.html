@@ -282,8 +282,7 @@ body {
   opacity: 1;
 
   /*
-    COMPLETE REVEAL SPEED
-    1.5 seconds
+    FINAL REVEAL TRANSITION
   */
 
   transition:
@@ -599,7 +598,12 @@ const canvas =
   document.getElementById("scratchCanvas");
 
 const ctx =
-  canvas.getContext("2d");
+  canvas.getContext(
+    "2d",
+    {
+      willReadFrequently: true
+    }
+  );
 
 const scratchText =
   document.getElementById("scratchText");
@@ -832,7 +836,8 @@ function scratch(event) {
 
 
   /*
-    Hide text when scratching starts
+    Hide "Scratch to reveal"
+    when the user starts.
   */
 
   if (!hasStarted) {
@@ -863,7 +868,12 @@ function scratch(event) {
 
 
   /*
-    SCRATCH SIZE
+    BIGGER SCRATCH BRUSH
+
+    55 = current size
+
+    Increase to 65 or 70
+    if you want an even larger area.
   */
 
   ctx.arc(
@@ -872,7 +882,7 @@ function scratch(event) {
 
     position.y,
 
-    34,
+    55,
 
     0,
 
@@ -886,14 +896,19 @@ function scratch(event) {
 
 
   /* =====================================
-     CHECK PROGRESS EVERY 10 MOVEMENTS
+     CHECK PROGRESS
   ===================================== */
 
   movementCounter++;
 
 
+  /*
+    Check more frequently because
+    the reveal threshold is only 5%.
+  */
+
   if (
-    movementCounter >= 10
+    movementCounter >= 4
   ) {
 
 
@@ -935,8 +950,8 @@ function getScratchedPercentage() {
 
 
   /*
-    Sample pixels for better
-    performance on iPhone
+    Sample pixels instead of checking
+    every single Retina pixel.
   */
 
   const sampleStep =
@@ -973,7 +988,6 @@ function getScratchedPercentage() {
   return (
 
     transparentPixels /
-
     sampledPixels
 
   ) * 100;
@@ -983,7 +997,7 @@ function getScratchedPercentage() {
 
 
 /* =========================================
-   CHECK IF WE REACHED 20%
+   REVEAL AT 5%
 ========================================= */
 
 function checkRevealProgress() {
@@ -1002,8 +1016,11 @@ function checkRevealProgress() {
 
 
   /*
-    Once 20% has been scratched,
-    reveal the entire photograph.
+    CHANGE THIS NUMBER IF DESIRED:
+
+    5  = reveal at 5%
+    10 = reveal at 10%
+    20 = reveal at 20%
   */
 
   if (
@@ -1044,8 +1061,8 @@ function revealEntirePhoto() {
 
 
   /*
-    Remaining scratch layer
-    fades away over 1.5 seconds.
+    Slowly reveal the rest
+    of the photograph.
   */
 
   canvas.style.opacity =
@@ -1053,8 +1070,8 @@ function revealEntirePhoto() {
 
 
   /*
-    Remove canvas AFTER
-    transition finishes.
+    1500 milliseconds =
+    1.5 second transition
   */
 
   setTimeout(

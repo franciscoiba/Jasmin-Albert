@@ -840,7 +840,7 @@ function getScratchedPercentage() {
 }
 
 /* =========================================
-   REVEAL AT 5%
+   REVEAL AT 50%
 ========================================= */
 
 function checkRevealProgress() {
@@ -853,7 +853,7 @@ function checkRevealProgress() {
     getScratchedPercentage();
 
   if (
-    percentage >= 80
+    percentage >= 50
   ) {
 
     revealEntirePhoto();
@@ -896,7 +896,7 @@ function revealEntirePhoto() {
 
     },
 
-    1500
+    2500
 
   );
 

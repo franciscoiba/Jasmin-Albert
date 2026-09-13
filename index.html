@@ -12,6 +12,7 @@
 
 <title>Jazmin & Albert | Save the Date</title>
 
+
 <style>
 
 /* =========================
@@ -37,9 +38,12 @@ body {
 
 .invitation {
   position: relative;
+
   width: 100%;
   min-height: 100vh;
+
   padding: 65px 22px 60px;
+
   text-align: center;
   overflow: hidden;
 }
@@ -70,15 +74,15 @@ body {
 
   filter:
     grayscale(100%)
-    brightness(1.15);
+    brightness(1.12);
 
-  opacity: 0.065;
+  opacity: 0.075;
 
   -webkit-mask-image:
     linear-gradient(
       to bottom,
       black 0%,
-      black 52%,
+      black 55%,
       transparent 100%
     );
 
@@ -86,7 +90,7 @@ body {
     linear-gradient(
       to bottom,
       black 0%,
-      black 52%,
+      black 55%,
       transparent 100%
     );
 
@@ -101,14 +105,16 @@ body {
 .content {
   position: relative;
   z-index: 2;
+
   width: 100%;
   max-width: 500px;
+
   margin: 0 auto;
 }
 
 
 /* =========================
-   TOP DETAILS
+   TOP TEXT
 ========================= */
 
 .top-details {
@@ -132,9 +138,12 @@ body {
 
 .small-line {
   display: block;
+
   width: 42px;
   height: 1px;
+
   margin-top: 14px;
+
   background: #777;
 }
 
@@ -149,8 +158,10 @@ body {
 
 .save {
   margin-bottom: 35px;
+
   font-size: 13px;
   font-weight: normal;
+
   letter-spacing: 7px;
 }
 
@@ -161,8 +172,11 @@ body {
 
 .name {
   font-size: clamp(47px, 14vw, 72px);
+
   font-weight: 400;
+
   line-height: 1.08;
+
   letter-spacing: 9px;
 }
 
@@ -177,8 +191,10 @@ body {
     serif;
 
   font-size: 57px;
+
   font-style: italic;
   font-weight: 300;
+
   line-height: 1;
 }
 
@@ -189,7 +205,9 @@ body {
 
 .date {
   margin-top: 24px;
+
   font-size: 18px;
+
   letter-spacing: 8px;
 }
 
@@ -200,8 +218,11 @@ body {
 
 .subtitle {
   margin: 45px auto 28px;
+
   font-size: 10px;
+
   letter-spacing: 4.5px;
+
   line-height: 2;
 }
 
@@ -222,7 +243,7 @@ body {
 
   overflow: hidden;
 
-  background: #ffffff;
+  background: #f8f8f6;
 
   border-radius: 4px;
 
@@ -231,10 +252,11 @@ body {
 }
 
 
-/* PHOTO */
+/* PHOTO UNDER SCRATCH */
 
 .reveal-photo {
   position: absolute;
+
   inset: 0;
 
   width: 100%;
@@ -244,14 +266,16 @@ body {
   object-position: center;
 
   user-select: none;
+
   -webkit-user-drag: none;
 }
 
 
-/* SCRATCH CANVAS */
+/* SCRATCH LAYER */
 
 #scratchCanvas {
   position: absolute;
+
   inset: 0;
 
   width: 100%;
@@ -264,11 +288,11 @@ body {
   opacity: 1;
 
   transition:
-    opacity 1.1s ease;
+    opacity 0.9s ease;
 }
 
 
-/* SCRATCH MESSAGE */
+/* SCRATCH TEXT */
 
 .scratch-instruction {
   position: absolute;
@@ -278,17 +302,17 @@ body {
 
   transform:
     translate(-50%, -50%)
-    rotate(-4deg);
+    rotate(-5deg);
 
   z-index: 6;
 
   pointer-events: none;
 
-  color: #8f806f;
+  color: #9a8874;
 
   font-family:
-    "Snell Roundhand",
     "Brush Script MT",
+    "Snell Roundhand",
     cursive;
 
   font-size: 34px;
@@ -296,7 +320,7 @@ body {
   line-height: 1.05;
 
   transition:
-    opacity 0.35s ease;
+    opacity 0.4s ease;
 }
 
 .heart {
@@ -321,13 +345,17 @@ body {
 .vertical-line {
   width: 1px;
   height: 35px;
+
   margin: 0 auto;
+
   background: #777;
 }
 
 .forever {
   margin-top: 22px;
+
   font-size: 10px;
+
   letter-spacing: 5px;
 }
 
@@ -359,12 +387,15 @@ body {
 
   .top-details {
     margin-bottom: 90px;
+
     font-size: 8px;
+
     letter-spacing: 3px;
   }
 
   .save {
     font-size: 11px;
+
     letter-spacing: 6px;
   }
 
@@ -374,6 +405,7 @@ body {
 
   .date {
     font-size: 16px;
+
     letter-spacing: 6px;
   }
 
@@ -387,16 +419,25 @@ body {
 
 </head>
 
+
 <body>
+
 
 <section class="invitation">
 
+
+  <!-- BACKGROUND WATERMARK -->
+
   <div class="watermark"></div>
+
 
   <div class="content">
 
 
+    <!-- TOP -->
+
     <div class="top-details">
+
 
       <div class="top-left">
 
@@ -417,46 +458,71 @@ body {
 
       </div>
 
+
     </div>
 
+
+    <!-- SAVE THE DATE -->
 
     <div class="save">
+
       SAVE THE DATE
+
     </div>
 
 
+    <!-- NAMES -->
+
     <h1 class="name">
+
       JAZMIN
+
     </h1>
+
 
     <div class="ampersand">
+
       &amp;
+
     </div>
 
+
     <h1 class="name">
+
       ALBERT
+
     </h1>
 
 
+    <!-- DATE -->
+
     <div class="date">
+
       02 · 19 · 2027
+
     </div>
 
+
+    <!-- SUBTITLE -->
 
     <div class="subtitle">
 
       A BEAUTIFUL TOMORROW
+
       <br>
+
       TOGETHER
 
     </div>
 
 
-    <!-- =========================
+
+    <!-- =====================
          SCRATCH TO REVEAL
-    ========================== -->
+    ====================== -->
 
     <div class="scratch-wrapper">
+
 
       <img
         class="reveal-photo"
@@ -464,9 +530,11 @@ body {
         alt="Jazmin and Albert"
       >
 
+
       <canvas
         id="scratchCanvas">
       </canvas>
+
 
       <div
         class="scratch-instruction"
@@ -474,34 +542,52 @@ body {
       >
 
         Scratch
+
         <br>
+
         to reveal
 
+
         <span class="heart">
+
           ♡
+
         </span>
 
+
       </div>
+
 
     </div>
 
 
+
+    <!-- BOTTOM -->
+
     <div class="bottom">
+
 
       <div class="vertical-line"></div>
 
+
       <div class="forever">
+
         OUR FOREVER BEGINS
+
       </div>
 
+
       <div class="arrow"></div>
+
 
     </div>
 
 
   </div>
 
+
 </section>
+
 
 
 <script>
@@ -514,26 +600,32 @@ const canvas =
   document.getElementById("scratchCanvas");
 
 const ctx =
-  canvas.getContext("2d", {
-    willReadFrequently: true
-  });
+  canvas.getContext("2d");
 
 const scratchText =
   document.getElementById("scratchText");
 
 
 let scratching = false;
-let revealed = false;
+
 let hasStarted = false;
 
-let lastX = null;
-let lastY = null;
+let completelyRevealed = false;
 
-let moveCounter = 0;
+
+/*
+  We don't calculate the percentage
+  every single movement.
+
+  This keeps the animation smoother
+  on iPhone and Android.
+*/
+
+let movementCounter = 0;
 
 
 /* =========================================
-   CREATE COVER
+   CREATE PEARL SCRATCH SURFACE
 ========================================= */
 
 function createScratchSurface() {
@@ -541,16 +633,27 @@ function createScratchSurface() {
   const rect =
     canvas.getBoundingClientRect();
 
+
   const ratio =
     window.devicePixelRatio || 1;
 
 
   canvas.width =
-    Math.round(rect.width * ratio);
+    Math.round(
+      rect.width * ratio
+    );
+
 
   canvas.height =
-    Math.round(rect.height * ratio);
+    Math.round(
+      rect.height * ratio
+    );
 
+
+  /*
+    Reset transformation first.
+    Important if canvas gets recreated.
+  */
 
   ctx.setTransform(
     1,
@@ -568,9 +671,7 @@ function createScratchSurface() {
   );
 
 
-  /*
-    Pearl white scratch layer
-  */
+  /* WHITE PEARL GRADIENT */
 
   const gradient =
     ctx.createLinearGradient(
@@ -583,17 +684,25 @@ function createScratchSurface() {
 
   gradient.addColorStop(
     0,
-    "#f4f2ee"
+    "#f3f1ed"
   );
 
+
   gradient.addColorStop(
-    0.45,
+    0.40,
     "#ffffff"
   );
 
+
+  gradient.addColorStop(
+    0.70,
+    "#f8f7f4"
+  );
+
+
   gradient.addColorStop(
     1,
-    "#eeeae4"
+    "#ebe8e2"
   );
 
 
@@ -613,25 +722,40 @@ function createScratchSurface() {
   );
 
 
-  /*
-    Very subtle paper texture
-  */
+
+  /* =====================================
+     SUBTLE PEARL / PAPER TEXTURE
+  ===================================== */
 
   for (
     let i = 0;
-    i < 700;
+    i < 2200;
     i++
   ) {
 
+
+    const opacity =
+      Math.random() * 0.045;
+
+
     ctx.fillStyle =
-      "rgba(120,110,100,0.018)";
+      "rgba(145,135,120," +
+      opacity +
+      ")";
 
 
     ctx.fillRect(
-      Math.random() * rect.width,
-      Math.random() * rect.height,
-      1,
-      1
+
+      Math.random() *
+      rect.width,
+
+      Math.random() *
+      rect.height,
+
+      Math.random() * 1.5,
+
+      Math.random() * 1.5
+
     );
 
   }
@@ -639,8 +763,9 @@ function createScratchSurface() {
 }
 
 
+
 /* =========================================
-   GET TOUCH / MOUSE POSITION
+   GET FINGER / MOUSE POSITION
 ========================================= */
 
 function getPosition(event) {
@@ -648,7 +773,9 @@ function getPosition(event) {
   const rect =
     canvas.getBoundingClientRect();
 
+
   let clientX;
+
   let clientY;
 
 
@@ -657,19 +784,27 @@ function getPosition(event) {
     event.touches.length
   ) {
 
+
     clientX =
       event.touches[0].clientX;
+
 
     clientY =
       event.touches[0].clientY;
 
-  } else {
+
+  }
+
+  else {
+
 
     clientX =
       event.clientX;
 
+
     clientY =
       event.clientY;
+
 
   }
 
@@ -677,54 +812,17 @@ function getPosition(event) {
   return {
 
     x:
-      clientX - rect.left,
+      clientX -
+      rect.left,
 
     y:
-      clientY - rect.top
+      clientY -
+      rect.top
 
   };
 
 }
 
-
-/* =========================================
-   START SCRATCH
-========================================= */
-
-function startScratch(event) {
-
-  if (revealed) {
-    return;
-  }
-
-
-  scratching = true;
-
-
-  if (!hasStarted) {
-
-    hasStarted = true;
-
-    scratchText.style.opacity =
-      "0";
-
-  }
-
-
-  const pos =
-    getPosition(event);
-
-
-  lastX =
-    pos.x;
-
-  lastY =
-    pos.y;
-
-
-  scratch(event);
-
-}
 
 
 /* =========================================
@@ -733,124 +831,119 @@ function startScratch(event) {
 
 function scratch(event) {
 
+
   if (
     !scratching ||
-    revealed
+    completelyRevealed
   ) {
+
     return;
+
   }
 
 
   event.preventDefault();
 
 
-  const pos =
+
+  /*
+    Hide "Scratch to reveal"
+    as soon as scratching begins.
+  */
+
+  if (!hasStarted) {
+
+
+    hasStarted = true;
+
+
+    scratchText.style.opacity =
+      "0";
+
+
+  }
+
+
+
+  const position =
     getPosition(event);
+
 
 
   ctx.globalCompositeOperation =
     "destination-out";
 
 
-  /*
-    Rounded scratch stroke.
-    Wider than before so it feels
-    more natural on a phone.
-  */
-
-  ctx.lineWidth =
-    56;
-
-  ctx.lineCap =
-    "round";
-
-  ctx.lineJoin =
-    "round";
-
-
   ctx.beginPath();
 
 
-  if (
-    lastX === null ||
-    lastY === null
-  ) {
-
-    ctx.moveTo(
-      pos.x,
-      pos.y
-    );
-
-  } else {
-
-    ctx.moveTo(
-      lastX,
-      lastY
-    );
-
-  }
-
-
-  ctx.lineTo(
-    pos.x,
-    pos.y
-  );
-
-
-  ctx.stroke();
-
-
   /*
-    Small circle ensures
-    first touch is visible.
-  */
+    Scratch brush size.
 
-  ctx.beginPath();
+    Increase 34 if you want
+    a larger scratch area.
+  */
 
   ctx.arc(
-    pos.x,
-    pos.y,
-    28,
+
+    position.x,
+
+    position.y,
+
+    34,
+
     0,
+
     Math.PI * 2
+
   );
+
 
   ctx.fill();
 
 
-  lastX =
-    pos.x;
 
-  lastY =
-    pos.y;
+  /* =====================================
+     CHECK PROGRESS EVERY 10 MOVEMENTS
+  ===================================== */
 
-
-  /*
-    Check progress only every few moves
-    to keep iPhone smooth.
-  */
-
-  moveCounter++;
+  movementCounter++;
 
 
   if (
-    moveCounter >= 8
+    movementCounter >= 10
   ) {
 
-    moveCounter = 0;
+
+    movementCounter = 0;
+
 
     checkRevealProgress();
+
 
   }
 
 }
 
 
+
 /* =========================================
-   CALCULATE SCRATCHED AREA
+   CALCULATE SCRATCHED PERCENTAGE
 ========================================= */
 
 function getScratchedPercentage() {
+
+
+  /*
+    Canvas has high-resolution pixels
+    on Retina displays.
+
+    We sample pixels instead of checking
+    absolutely every pixel.
+
+    This is considerably faster on iPhone.
+  */
+
 
   const imageData =
     ctx.getImageData(
@@ -865,33 +958,50 @@ function getScratchedPercentage() {
     imageData.data;
 
 
-  let transparent = 0;
-  let total = 0;
+  let transparentPixels = 0;
+
+  let sampledPixels = 0;
 
 
   /*
-    Sample pixels instead of checking all.
-    Faster on Retina displays.
+    Every pixel = 4 values:
+    R G B A
+
+    Instead of checking every pixel,
+    sample approximately every 16 pixels.
   */
 
+
   const sampleStep =
-    4 * 20;
+    4 * 16;
 
 
   for (
+
     let i = 3;
+
     i < pixels.length;
+
     i += sampleStep
+
   ) {
 
-    total++;
 
+    sampledPixels++;
+
+
+    /*
+      Alpha under 100 means
+      the area has been scratched away.
+    */
 
     if (
-      pixels[i] < 90
+      pixels[i] < 100
     ) {
 
-      transparent++;
+
+      transparentPixels++;
+
 
     }
 
@@ -899,21 +1009,28 @@ function getScratchedPercentage() {
 
 
   return (
-    transparent /
-    total
+
+    transparentPixels /
+
+    sampledPixels
+
   ) * 100;
 
 }
 
 
+
 /* =========================================
-   CHECK 30%
+   CHECK IF WE REACHED 70%
 ========================================= */
 
 function checkRevealProgress() {
 
-  if (revealed) {
+
+  if (completelyRevealed) {
+
     return;
+
   }
 
 
@@ -921,81 +1038,116 @@ function checkRevealProgress() {
     getScratchedPercentage();
 
 
+
   /*
-    At 30% scratched,
-    reveal everything.
+    CHANGE THIS NUMBER IF DESIRED:
+
+    70 = reveal at 70%
+    60 = reveal at 60%
+    50 = reveal at 50%
   */
 
   if (
-    percentage >= 30
+    percentage >= 70
   ) {
 
+
     revealEntirePhoto();
+
 
   }
 
 }
 
 
+
 /* =========================================
-   COMPLETE REVEAL
+   REVEAL ENTIRE PHOTO
 ========================================= */
 
 function revealEntirePhoto() {
 
-  if (revealed) {
+
+  if (completelyRevealed) {
+
     return;
+
   }
 
 
-  revealed = true;
+  completelyRevealed = true;
 
   scratching = false;
 
+
+
+  /*
+    Make sure text disappears.
+  */
 
   scratchText.style.opacity =
     "0";
 
 
+
   /*
-    Slowly fade remaining scratch layer.
+    Fade remaining pearl layer away.
   */
 
   canvas.style.opacity =
     "0";
 
 
+
+  /*
+    After fade animation,
+    remove canvas completely.
+  */
+
   setTimeout(
 
     function() {
 
+
       canvas.style.display =
         "none";
 
+
     },
 
-    1100
+    900
 
   );
 
 }
 
 
+
 /* =========================================
-   TOUCH EVENTS
+   TOUCH EVENTS — IPHONE / ANDROID
 ========================================= */
 
 canvas.addEventListener(
 
   "touchstart",
 
-  startScratch,
+  function(event) {
+
+
+    scratching = true;
+
+
+    scratch(event);
+
+
+  },
 
   {
     passive: false
   }
 
 );
+
 
 
 canvas.addEventListener(
@@ -1011,22 +1163,28 @@ canvas.addEventListener(
 );
 
 
+
 canvas.addEventListener(
 
   "touchend",
 
   function() {
 
+
     scratching = false;
 
-    lastX = null;
-    lastY = null;
+
+    /*
+      Also check when finger is lifted.
+    */
 
     checkRevealProgress();
+
 
   }
 
 );
+
 
 
 canvas.addEventListener(
@@ -1035,27 +1193,37 @@ canvas.addEventListener(
 
   function() {
 
+
     scratching = false;
 
-    lastX = null;
-    lastY = null;
 
   }
 
 );
 
 
+
 /* =========================================
-   MOUSE EVENTS
+   MOUSE EVENTS — COMPUTER
 ========================================= */
 
 canvas.addEventListener(
 
   "mousedown",
 
-  startScratch
+  function(event) {
+
+
+    scratching = true;
+
+
+    scratch(event);
+
+
+  }
 
 );
+
 
 
 canvas.addEventListener(
@@ -1067,26 +1235,30 @@ canvas.addEventListener(
 );
 
 
+
 window.addEventListener(
 
   "mouseup",
 
   function() {
 
+
     if (scratching) {
+
 
       scratching = false;
 
-      lastX = null;
-      lastY = null;
 
       checkRevealProgress();
 
+
     }
+
 
   }
 
 );
+
 
 
 /* =========================================
@@ -1097,11 +1269,19 @@ window.addEventListener(
 
   "load",
 
-  createScratchSurface
+  function() {
+
+
+    createScratchSurface();
+
+
+  }
 
 );
 
+
 </script>
+
 
 </body>
 

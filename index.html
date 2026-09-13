@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jazmin & Albert | Save the Date</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #171717;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-x: hidden;
+}
+
+/* MAIN INVITATION */
+
+.invitation {
+  position: relative;
+  min-height: 100vh;
+  text-align: center;
+  padding: 70px 24px 55px;
+  overflow: hidden;
+}
+
+/* WATERMARK PHOTO */
+
+.watermark {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 650px;
+  height: 850px;
+
+  transform: translateX(-50%);
+
+  background-image: url("couple.jpg");
+  background-size: cover;
+  background-position: center top;
+
+  filter: grayscale(100%);
+  opacity: 0.075;
+
+  -webkit-mask-image:
+    linear-gradient(to bottom,
+    black 0%,
+    black 55%,
+    transparent 100%);
+
+  mask-image:
+    linear-gradient(to bottom,
+    black 0%,
+    black 55%,
+    transparent 100%);
+
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* TOP CORNERS */
+
+.top-details {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+
+  font-size: 9px;
+  letter-spacing: 4px;
+  line-height: 2;
+
+  margin-bottom: 110px;
+}
+
+.top-details div:last-child {
+  text-align: right;
+}
+
+.small-line {
+  display: block;
+  width: 42px;
+  height: 1px;
+  background: #888;
+  margin-top: 15px;
+}
+
+/* SAVE DATE */
+
+.save {
+  font-size: 13px;
+  letter-spacing: 7px;
+  margin-bottom: 35px;
+}
+
+/* NAMES */
+
+.name {
+  font-size: clamp(48px, 15vw, 76px);
+  font-weight: 400;
+  letter-spacing: 10px;
+  line-height: 1.1;
+}
+
+.ampersand {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 55px;
+  font-weight: 300;
+  color: #c6b6a2;
+  margin: 4px 0;
+}
+
+.date {
+  margin-top: 22px;
+  font-size: 19px;
+  letter-spacing: 9px;
+}
+
+.subtitle {
+  margin: 45px auto 30px;
+  font-size: 10px;
+  letter-spacing: 5px;
+  line-height: 2;
+}
+
+/* SCRATCH CARD */
+
+.scratch-wrapper {
+  width: 100%;
+  max-width: 390px;
+  aspect-ratio: 4 / 5;
+  margin: 20px auto 0;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 3px;
+  background: #f7f7f5;
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.035);
+}
+
+.reveal-photo {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+#scratchCanvas {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  touch-action: none;
+  z-index: 5;
+
+  transition: opacity 1s ease;
+}
+
+.scratch-instruction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 6;
+  pointer-events: none;
+
+  color: #897967;
+
+  font-family: cursive;
+  font-size: 31px;
+  line-height: 1.1;
+
+  transition: opacity .4s ease;
+}
+
+.heart {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 27px;
+  margin-top: 12px;
+}
+
+/* BOTTOM */
+
+.bottom {
+  margin-top: 38px;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 35px;
+  background: #888;
+  margin: auto;
+}
+
+.forever {
+  margin-top: 22px;
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.arrow {
+  margin: 25px auto 0;
+  width: 18px;
+  height: 18px;
+
+  border-right: 1px solid #111;
+  border-bottom: 1px solid #111;
+
+  transform: rotate(45deg);
+}
+
+/* SMALL PHONE */
+
+@media (max-width: 390px) {
+
+  .invitation {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .top-details {
+    margin-bottom: 90px;
+  }
+
+  .name {
+    letter-spacing: 7px;
+  }
+
+  .date {
+    letter-spacing: 7px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<section class="invitation">
+
+  <div class="watermark"></div>
+
+  <div class="content">
+
+    <div class="top-details">
+
+      <div>
+        LOVE<br>
+        ALWAYS
+        <span class="small-line"></span>
+      </div>
+
+      <div>
+        A BEAUTIFUL<br>
+        TOMORROW
+        <span class="small-line" style="margin-left:auto;"></span>
+      </div>
+
+    </div>
+
+    <div class="save">
+      SAVE THE DATE
+    </div>
+
+    <h1 class="name">
+      JAZMIN
+    </h1>
+
+    <div class="ampersand">
+      &amp;
+    </div>
+
+    <h1 class="name">
+      ALBERT
+    </h1>
+
+    <div class="date">
+      02 · 19 · 2027
+    </div>
+
+    <div class="subtitle">
+      A BEAUTIFUL TOMORROW<br>
+      TOGETHER
+    </div>
+
+    <!-- SCRATCH PHOTO -->
+
+    <div class="scratch-wrapper">
+
+      <img
+        class="reveal-photo"
+        src="couple.jpg"
+        alt="Jazmin and Albert">
+
+      <canvas id="scratchCanvas"></canvas>
+
+      <div
+        class="scratch-instruction"
+        id="scratchText">
+
+        Scratch<br>
+        to reveal
+
+        <span class="heart">
+          ♡
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="bottom">
+
+      <div class="vertical-line"></div>
+
+      <div class="forever">
+        OUR FOREVER BEGINS
+      </div>
+
+      <div class="arrow"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+
+const canvas =
+  document.getElementById("scratchCanvas");
+
+const scratchText =
+  document.getElementById("scratchText");
+
+const ctx =
+  canvas.getContext("2d");
+
+let scratching = false;
+let started = false;
+
+
+/* CREATE PEARL SCRATCH SURFACE */
+
+function setupCanvas() {
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  const ratio =
+    window.devicePixelRatio || 1;
+
+  canvas.width =
+    rect.width * ratio;
+
+  canvas.height =
+    rect.height * ratio;
+
+  ctx.scale(ratio, ratio);
+
+  const gradient =
+    ctx.createLinearGradient(
+      0,
+      0,
+      rect.width,
+      rect.height
+    );
+
+  gradient.addColorStop(
+    0,
+    "#f4f2ed"
+  );
+
+  gradient.addColorStop(
+    .5,
+    "#ffffff"
+  );
+
+  gradient.addColorStop(
+    1,
+    "#ebe7df"
+  );
+
+  ctx.fillStyle = gradient;
+
+  ctx.fillRect(
+    0,
+    0,
+    rect.width,
+    rect.height
+  );
+
+  /* subtle pearl texture */
+
+  for (let i = 0; i < 1800; i++) {
+
+    ctx.fillStyle =
+      `rgba(160,150,135,${Math.random() * .055})`;
+
+    ctx.fillRect(
+      Math.random() * rect.width,
+      Math.random() * rect.height,
+      1,
+      1
+    );
+  }
+}
+
+
+/* GET TOUCH POSITION */
+
+function position(e) {
+
+  const rect =
+    canvas.getBoundingClientRect();
+
+  const touch =
+    e.touches
+      ? e.touches[0]
+      : e;
+
+  return {
+
+    x:
+      touch.clientX -
+      rect.left,
+
+    y:
+      touch.clientY -
+      rect.top
+
+  };
+}
+
+
+/* SCRATCH */
+
+function scratch(e) {
+
+  if (!scratching)
+    return;
+
+  e.preventDefault();
+
+  if (!started) {
+
+    started = true;
+
+    scratchText.style.opacity = 0;
+
+  }
+
+  const p =
+    position(e);
+
+  ctx.globalCompositeOperation =
+    "destination-out";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    p.x,
+    p.y,
+    28,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+}
+
+
+/* TOUCH */
+
+canvas.addEventListener(
+  "touchstart",
+  e => {
+
+    scratching = true;
+    scratch(e);
+
+  },
+  { passive:false }
+);
+
+canvas.addEventListener(
+  "touchmove",
+  scratch,
+  { passive:false }
+);
+
+canvas.addEventListener(
+  "touchend",
+  () => scratching = false
+);
+
+
+/* MOUSE */
+
+canvas.addEventListener(
+  "mousedown",
+  e => {
+
+    scratching = true;
+    scratch(e);
+
+  }
+);
+
+canvas.addEventListener(
+  "mousemove",
+  scratch
+);
+
+window.addEventListener(
+  "mouseup",
+  () => scratching = false
+);
+
+
+/* INITIALIZE */
+
+window.addEventListener(
+  "load",
+  setupCanvas
+);
+
+</script>
+
+</body>
+</html>

@@ -186,18 +186,6 @@ body {
 }
 
 /* =========================
-   DATE
-========================= */
-
-.date {
-  margin-top: 24px;
-
-  font-size: 18px;
-
-  letter-spacing: 8px;
-}
-
-/* =========================
    SUBTITLE
 ========================= */
 
@@ -258,7 +246,7 @@ body {
 }
 
 /* =========================
-   DATE OVER PHOTO
+   DATE UNDER SCRATCH
 ========================= */
 
 .reveal-date {
@@ -284,7 +272,7 @@ body {
 
   font-size: 18px;
 
-  letter-spacing: 6px;
+  letter-spacing: 8px;
 
   text-align: center;
 
@@ -428,12 +416,6 @@ body {
     letter-spacing: 7px;
   }
 
-  .date {
-    font-size: 16px;
-
-    letter-spacing: 6px;
-  }
-
   .subtitle {
     letter-spacing: 3.5px;
   }
@@ -443,7 +425,7 @@ body {
 
     font-size: 16px;
 
-    letter-spacing: 5px;
+    letter-spacing: 6px;
   }
 
 }
@@ -506,12 +488,6 @@ body {
 
     </h1>
 
-    <div class="date">
-
-      02 · 19 · 2027
-
-    </div>
-
     <div class="subtitle">
 
       A BEAUTIFUL TOMORROW
@@ -524,7 +500,7 @@ body {
 
     <div class="scratch-wrapper">
 
-      <!-- PHOTO THAT WILL BE REVEALED -->
+      <!-- PHOTO -->
 
       <img
         class="reveal-photo"
@@ -532,7 +508,7 @@ body {
         alt="Jazmin and Albert"
       >
 
-      <!-- DATE THAT WILL BE REVEALED WITH PHOTO -->
+      <!-- DATE REVEALED WITH PHOTO -->
 
       <div class="reveal-date">
 
@@ -546,7 +522,7 @@ body {
         id="scratchCanvas">
       </canvas>
 
-      <!-- SCRATCH INSTRUCTION -->
+      <!-- SCRATCH TEXT -->
 
       <div
         class="scratch-instruction"
@@ -648,8 +624,6 @@ function createScratchSurface() {
     ratio
   );
 
-  /* WHITE PEARL GRADIENT */
-
   const gradient =
     ctx.createLinearGradient(
       0,
@@ -726,7 +700,7 @@ function createScratchSurface() {
 }
 
 /* =========================================
-   GET FINGER POSITION
+   GET POSITION
 ========================================= */
 
 function getPosition(event) {
@@ -775,7 +749,7 @@ function getPosition(event) {
 }
 
 /* =========================================
-   ERASE WITH FINGER
+   ERASE
 ========================================= */
 
 function eraseWithFinger(event) {
@@ -803,27 +777,15 @@ function eraseWithFinger(event) {
   const position =
     getPosition(event);
 
-  /*
-    DESTINATION-OUT =
-    COMPLETELY ERASES THE SCRATCH LAYER
-  */
-
   ctx.globalCompositeOperation =
     "destination-out";
-
-  /*
-    FULL SOLID FINGER CIRCLE
-  */
 
   ctx.beginPath();
 
   ctx.arc(
     position.x,
     position.y,
-
-    /* FINGER SIZE */
     55,
-
     0,
     Math.PI * 2
   );
@@ -834,10 +796,6 @@ function eraseWithFinger(event) {
   ctx.fill();
 
   movementCounter++;
-
-  /*
-    CHECK REVEAL PROGRESS
-  */
 
   if (
     movementCounter >= 2
@@ -940,10 +898,6 @@ function revealEntirePhoto() {
 
   scratchText.style.opacity =
     "0";
-
-  /*
-    FADE OUT REMAINING SCRATCH LAYER
-  */
 
   canvas.style.opacity =
     "0";

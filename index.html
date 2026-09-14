@@ -428,7 +428,9 @@ body {
   letter-spacing: 5px;
 }
 
-/* POINT */
+/* =========================
+   POINT
+========================= */
 
 .arrow {
   width: 5px;
@@ -722,7 +724,7 @@ const translations = {
   es: {
 
     topLeft:
-      "AMOR<br>SIEMPRE",
+      "AMOR<br>ETERNO",
 
     topRight:
       "UN HERMOSO<br>MAÑANA",
@@ -734,10 +736,10 @@ const translations = {
       "UN HERMOSO MAÑANA<br>JUNTOS",
 
     scratch:
-      "Raspa<br>para revelar",
+      "Raspa<br>para descubrir",
 
     forever:
-      "NUESTRO PARA SIEMPRE COMIENZA"
+      "AQUÍ COMIENZA NUESTRO PARA SIEMPRE"
 
   }
 
@@ -752,30 +754,36 @@ function changeLanguage(language) {
   document.documentElement.lang =
     language;
 
+
   document.getElementById(
     "topLeft"
   ).innerHTML =
     text.topLeft;
+
 
   document.getElementById(
     "topRight"
   ).innerHTML =
     text.topRight;
 
+
   document.getElementById(
     "saveText"
   ).innerHTML =
     text.save;
+
 
   document.getElementById(
     "subtitleText"
   ).innerHTML =
     text.subtitle;
 
+
   document.getElementById(
     "scratchWords"
   ).innerHTML =
     text.scratch;
+
 
   document.getElementById(
     "foreverText"
@@ -783,14 +791,13 @@ function changeLanguage(language) {
     text.forever;
 
 
-  /* ACTIVE LANGUAGE */
-
   document.getElementById(
     "langEN"
   ).classList.toggle(
     "active",
     language === "en"
   );
+
 
   document.getElementById(
     "langES"
@@ -811,6 +818,7 @@ const canvas =
     "scratchCanvas"
   );
 
+
 const ctx =
   canvas.getContext(
     "2d",
@@ -819,10 +827,12 @@ const ctx =
     }
   );
 
+
 const scratchText =
   document.getElementById(
     "scratchText"
   );
+
 
 let scratching = false;
 
@@ -842,6 +852,7 @@ function createScratchSurface() {
   const rect =
     canvas.getBoundingClientRect();
 
+
   const ratio =
     window.devicePixelRatio || 1;
 
@@ -850,6 +861,7 @@ function createScratchSurface() {
     Math.round(
       rect.width * ratio
     );
+
 
   canvas.height =
     Math.round(
@@ -887,15 +899,18 @@ function createScratchSurface() {
     "#f3f1ed"
   );
 
+
   gradient.addColorStop(
     0.40,
     "#ffffff"
   );
 
+
   gradient.addColorStop(
     0.70,
     "#f8f7f4"
   );
+
 
   gradient.addColorStop(
     1,

@@ -45,6 +45,57 @@ body {
 }
 
 /* =========================
+   LANGUAGE SWITCH
+========================= */
+
+.language-switch {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.language-switch button {
+  appearance: none;
+  -webkit-appearance: none;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #aaa;
+
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.language-switch button.active {
+  color: #171717;
+}
+
+.language-divider {
+  color: #c7b7a4;
+  font-size: 9px;
+}
+
+/* =========================
    BACKGROUND WATERMARK
 ========================= */
 
@@ -52,6 +103,7 @@ body {
   position: absolute;
   top: 0;
   left: 50%;
+
   transform: translateX(-50%);
 
   width: 100%;
@@ -96,9 +148,12 @@ body {
 
 .content {
   position: relative;
+
   z-index: 2;
+
   width: 100%;
   max-width: 500px;
+
   margin: 0 auto;
 }
 
@@ -373,7 +428,7 @@ body {
   letter-spacing: 5px;
 }
 
-/* POINT INSTEAD OF ARROW */
+/* POINT */
 
 .arrow {
   width: 5px;
@@ -397,6 +452,13 @@ body {
       55px
       18px
       55px;
+  }
+
+  .language-switch {
+    top: 18px;
+    right: 18px;
+
+    font-size: 8px;
   }
 
   .top-details {
@@ -439,7 +501,39 @@ body {
 
 <section class="invitation">
 
+  <!-- LANGUAGE SWITCH -->
+
+  <div
+    class="language-switch"
+    aria-label="Language selector"
+  >
+
+    <button
+      type="button"
+      id="langES"
+      onclick="changeLanguage('es')"
+    >
+      ES
+    </button>
+
+    <span class="language-divider">
+      |
+    </span>
+
+    <button
+      type="button"
+      id="langEN"
+      class="active"
+      onclick="changeLanguage('en')"
+    >
+      EN
+    </button>
+
+  </div>
+
+
   <div class="watermark"></div>
+
 
   <div class="content">
 
@@ -447,17 +541,22 @@ body {
 
       <div class="top-left">
 
-        LOVE<br>
-        ALWAYS
+        <span id="topLeft">
+          LOVE<br>
+          ALWAYS
+        </span>
 
         <span class="small-line"></span>
 
       </div>
 
+
       <div class="top-right">
 
-        A BEAUTIFUL<br>
-        TOMORROW
+        <span id="topRight">
+          A BEAUTIFUL<br>
+          TOMORROW
+        </span>
 
         <span class="small-line"></span>
 
@@ -465,11 +564,16 @@ body {
 
     </div>
 
-    <div class="save">
+
+    <div
+      class="save"
+      id="saveText"
+    >
 
       SAVE THE DATE
 
     </div>
+
 
     <h1 class="name">
 
@@ -477,11 +581,13 @@ body {
 
     </h1>
 
+
     <div class="ampersand">
 
       &amp;
 
     </div>
+
 
     <h1 class="name">
 
@@ -489,7 +595,11 @@ body {
 
     </h1>
 
-    <div class="subtitle">
+
+    <div
+      class="subtitle"
+      id="subtitleText"
+    >
 
       A BEAUTIFUL TOMORROW
 
@@ -498,6 +608,7 @@ body {
       TOGETHER
 
     </div>
+
 
     <div class="scratch-wrapper">
 
@@ -509,6 +620,7 @@ body {
         alt="Jazmin and Albert"
       >
 
+
       <!-- DATE REVEALED WITH PHOTO -->
 
       <div class="reveal-date">
@@ -517,11 +629,13 @@ body {
 
       </div>
 
+
       <!-- SCRATCH LAYER -->
 
       <canvas
         id="scratchCanvas">
       </canvas>
+
 
       <!-- SCRATCH TEXT -->
 
@@ -530,11 +644,15 @@ body {
         id="scratchText"
       >
 
-        Scratch
+        <span id="scratchWords">
 
-        <br>
+          Scratch
 
-        to reveal
+          <br>
+
+          to reveal
+
+        </span>
 
         <span class="heart">
 
@@ -546,15 +664,21 @@ body {
 
     </div>
 
+
     <div class="bottom">
 
       <div class="vertical-line"></div>
 
-      <div class="forever">
+
+      <div
+        class="forever"
+        id="foreverText"
+      >
 
         OUR FOREVER BEGINS
 
       </div>
+
 
       <div class="arrow"></div>
 
@@ -564,14 +688,128 @@ body {
 
 </section>
 
+
 <script>
+
+/* =========================================
+   LANGUAGE SWITCH
+========================================= */
+
+const translations = {
+
+  en: {
+
+    topLeft:
+      "LOVE<br>ALWAYS",
+
+    topRight:
+      "A BEAUTIFUL<br>TOMORROW",
+
+    save:
+      "SAVE THE DATE",
+
+    subtitle:
+      "A BEAUTIFUL TOMORROW<br>TOGETHER",
+
+    scratch:
+      "Scratch<br>to reveal",
+
+    forever:
+      "OUR FOREVER BEGINS"
+
+  },
+
+  es: {
+
+    topLeft:
+      "AMOR<br>SIEMPRE",
+
+    topRight:
+      "UN HERMOSO<br>MAÑANA",
+
+    save:
+      "RESERVA LA FECHA",
+
+    subtitle:
+      "UN HERMOSO MAÑANA<br>JUNTOS",
+
+    scratch:
+      "Raspa<br>para revelar",
+
+    forever:
+      "NUESTRO PARA SIEMPRE COMIENZA"
+
+  }
+
+};
+
+
+function changeLanguage(language) {
+
+  const text =
+    translations[language];
+
+  document.documentElement.lang =
+    language;
+
+  document.getElementById(
+    "topLeft"
+  ).innerHTML =
+    text.topLeft;
+
+  document.getElementById(
+    "topRight"
+  ).innerHTML =
+    text.topRight;
+
+  document.getElementById(
+    "saveText"
+  ).innerHTML =
+    text.save;
+
+  document.getElementById(
+    "subtitleText"
+  ).innerHTML =
+    text.subtitle;
+
+  document.getElementById(
+    "scratchWords"
+  ).innerHTML =
+    text.scratch;
+
+  document.getElementById(
+    "foreverText"
+  ).innerHTML =
+    text.forever;
+
+
+  /* ACTIVE LANGUAGE */
+
+  document.getElementById(
+    "langEN"
+  ).classList.toggle(
+    "active",
+    language === "en"
+  );
+
+  document.getElementById(
+    "langES"
+  ).classList.toggle(
+    "active",
+    language === "es"
+  );
+
+}
+
 
 /* =========================================
    SCRATCH TO REVEAL
 ========================================= */
 
 const canvas =
-  document.getElementById("scratchCanvas");
+  document.getElementById(
+    "scratchCanvas"
+  );
 
 const ctx =
   canvas.getContext(
@@ -582,12 +820,18 @@ const ctx =
   );
 
 const scratchText =
-  document.getElementById("scratchText");
+  document.getElementById(
+    "scratchText"
+  );
 
 let scratching = false;
+
 let hasStarted = false;
+
 let completelyRevealed = false;
+
 let movementCounter = 0;
+
 
 /* =========================================
    CREATE SCRATCH SURFACE
@@ -601,6 +845,7 @@ function createScratchSurface() {
   const ratio =
     window.devicePixelRatio || 1;
 
+
   canvas.width =
     Math.round(
       rect.width * ratio
@@ -611,6 +856,7 @@ function createScratchSurface() {
       rect.height * ratio
     );
 
+
   ctx.setTransform(
     1,
     0,
@@ -620,10 +866,12 @@ function createScratchSurface() {
     0
   );
 
+
   ctx.scale(
     ratio,
     ratio
   );
+
 
   const gradient =
     ctx.createLinearGradient(
@@ -632,6 +880,7 @@ function createScratchSurface() {
       rect.width,
       rect.height
     );
+
 
   gradient.addColorStop(
     0,
@@ -653,11 +902,14 @@ function createScratchSurface() {
     "#ebe8e2"
   );
 
+
   ctx.globalCompositeOperation =
     "source-over";
 
+
   ctx.fillStyle =
     gradient;
+
 
   ctx.fillRect(
     0,
@@ -665,6 +917,7 @@ function createScratchSurface() {
     rect.width,
     rect.height
   );
+
 
   /* SUBTLE TEXTURE */
 
@@ -677,10 +930,12 @@ function createScratchSurface() {
     const opacity =
       Math.random() * 0.025;
 
+
     ctx.fillStyle =
       "rgba(145,135,120," +
       opacity +
       ")";
+
 
     ctx.fillRect(
 
@@ -700,6 +955,7 @@ function createScratchSurface() {
 
 }
 
+
 /* =========================================
    GET POSITION
 ========================================= */
@@ -709,8 +965,11 @@ function getPosition(event) {
   const rect =
     canvas.getBoundingClientRect();
 
+
   let clientX;
+
   let clientY;
+
 
   if (
     event.touches &&
@@ -735,6 +994,7 @@ function getPosition(event) {
 
   }
 
+
   return {
 
     x:
@@ -748,6 +1008,7 @@ function getPosition(event) {
   };
 
 }
+
 
 /* =========================================
    ERASE
@@ -764,7 +1025,9 @@ function eraseWithFinger(event) {
 
   }
 
+
   event.preventDefault();
+
 
   if (!hasStarted) {
 
@@ -775,28 +1038,42 @@ function eraseWithFinger(event) {
 
   }
 
+
   const position =
     getPosition(event);
+
 
   ctx.globalCompositeOperation =
     "destination-out";
 
+
   ctx.beginPath();
 
+
   ctx.arc(
+
     position.x,
+
     position.y,
+
     55,
+
     0,
+
     Math.PI * 2
+
   );
+
 
   ctx.fillStyle =
     "rgba(0,0,0,1)";
 
+
   ctx.fill();
 
+
   movementCounter++;
+
 
   if (
     movementCounter >= 2
@@ -809,6 +1086,7 @@ function eraseWithFinger(event) {
   }
 
 }
+
 
 /* =========================================
    SCRATCHED PERCENTAGE
@@ -824,14 +1102,19 @@ function getScratchedPercentage() {
       canvas.height
     );
 
+
   const pixels =
     imageData.data;
 
+
   let transparentPixels = 0;
+
   let sampledPixels = 0;
+
 
   const sampleStep =
     4 * 16;
+
 
   for (
     let i = 3;
@@ -840,6 +1123,7 @@ function getScratchedPercentage() {
   ) {
 
     sampledPixels++;
+
 
     if (
       pixels[i] < 20
@@ -851,6 +1135,7 @@ function getScratchedPercentage() {
 
   }
 
+
   return (
 
     transparentPixels /
@@ -860,6 +1145,7 @@ function getScratchedPercentage() {
 
 }
 
+
 /* =========================================
    REVEAL AT 50%
 ========================================= */
@@ -867,11 +1153,15 @@ function getScratchedPercentage() {
 function checkRevealProgress() {
 
   if (completelyRevealed) {
+
     return;
+
   }
+
 
   const percentage =
     getScratchedPercentage();
+
 
   if (
     percentage >= 50
@@ -883,6 +1173,7 @@ function checkRevealProgress() {
 
 }
 
+
 /* =========================================
    FINAL REVEAL
 ========================================= */
@@ -890,18 +1181,24 @@ function checkRevealProgress() {
 function revealEntirePhoto() {
 
   if (completelyRevealed) {
+
     return;
+
   }
+
 
   completelyRevealed = true;
 
   scratching = false;
 
+
   scratchText.style.opacity =
     "0";
 
+
   canvas.style.opacity =
     "0";
+
 
   setTimeout(
 
@@ -917,6 +1214,7 @@ function revealEntirePhoto() {
   );
 
 }
+
 
 /* =========================================
    TOUCH EVENTS
@@ -940,6 +1238,7 @@ canvas.addEventListener(
 
 );
 
+
 canvas.addEventListener(
 
   "touchmove",
@@ -951,6 +1250,7 @@ canvas.addEventListener(
   }
 
 );
+
 
 canvas.addEventListener(
 
@@ -966,6 +1266,7 @@ canvas.addEventListener(
 
 );
 
+
 canvas.addEventListener(
 
   "touchcancel",
@@ -977,6 +1278,7 @@ canvas.addEventListener(
   }
 
 );
+
 
 /* =========================================
    MOUSE EVENTS
@@ -996,6 +1298,7 @@ canvas.addEventListener(
 
 );
 
+
 canvas.addEventListener(
 
   "mousemove",
@@ -1003,6 +1306,7 @@ canvas.addEventListener(
   eraseWithFinger
 
 );
+
 
 window.addEventListener(
 
@@ -1021,6 +1325,7 @@ window.addEventListener(
   }
 
 );
+
 
 /* =========================================
    INITIALIZE
